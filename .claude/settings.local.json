@@ -4,7 +4,8 @@
       "mcp__figma__get_design_context",
       "Bash(python:*)",
       "Bash(npm run:*)",
-      "Bash(del:*)"
+      "Bash(del:*)",
+      "Bash(npx vite:*)"
     ]
   }
 }
