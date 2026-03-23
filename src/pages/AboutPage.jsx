@@ -1,95 +1,128 @@
 import CTABanner from "../components/CTABanner";
 
+// ─── Fresh asset URLs from Figma ───────────────────────────────────────────
 const imgs = {
-  // Hero
-  heroPeople: "https://www.figma.com/api/mcp/asset/41054871-5c64-4bb8-a1d7-856312fae02e",
-  heroEllipse: "https://www.figma.com/api/mcp/asset/d7ed772f-89f7-43de-ab5b-547e9c6b1da0",
-  // Customer avatars (stats card)
-  avatarGroup: "https://www.figma.com/api/mcp/asset/05737b7d-3578-4eef-99bb-ae0c187cb946",
-  // Story section - team photo
-  teamPhoto: "https://www.figma.com/api/mcp/asset/8276e1d6-36c1-4dfd-a813-f4bb47fbcbb3",
-  // Quote marks
-  quoteOpen: "https://www.figma.com/api/mcp/asset/9dba6a55-c1dd-4f0f-b2ad-193b165a84ae",
-  quoteClose: "https://www.figma.com/api/mcp/asset/71c5836a-90ef-47b0-a9a4-180d97734645",
-  // Team members
-  member1: "https://www.figma.com/api/mcp/asset/9e48fc72-ef07-417c-94fc-ae7477e7ac62",
-  member2: "https://www.figma.com/api/mcp/asset/4b235cd4-874e-415d-a6f6-f7190e1e92cd",
-  member3: "https://www.figma.com/api/mcp/asset/339370c8-34c4-47e3-9707-1db32f35bbb6",
-  member4: "https://www.figma.com/api/mcp/asset/3767a8d3-fe01-4556-8780-4393ca6bbcbe",
+  heroPeople:   "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293596/blissful-cleaning/42fa429d-b184-445a-8b1f-b26b0ed88f95.png",
+  heroEllipse:  "https://res.cloudinary.com/dgr33gxhd/raw/upload/v1774293573/blissful-cleaning/3b0a1247-9ba7-4daa-ad69-453c9e629b1a",
+  avatarFaces:  "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293600/blissful-cleaning/4f781f65-7376-45d1-bb10-0d7836e1c330.png",
+  avatarMask:   "https://res.cloudinary.com/dgr33gxhd/raw/upload/v1774293601/blissful-cleaning/3f78a5ba-2547-4deb-9593-b780cd52fe40",
+  storyPhoto:   "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293603/blissful-cleaning/3891d8cc-7208-4dea-b681-e5c36ec317b2.png",
+  quoteOpen:    "https://res.cloudinary.com/dgr33gxhd/raw/upload/v1774293606/blissful-cleaning/2d18b44f-853b-400f-b3b1-2e370e833f68",
+  quoteClose:   "https://res.cloudinary.com/dgr33gxhd/raw/upload/v1774293607/blissful-cleaning/3e87b74f-6a58-432f-a647-6aa657ae3ea5",
+  member1:      "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293609/blissful-cleaning/00f81d94-e5d1-416c-9214-cb9895d1e2cb.jpg",
+  member2:      "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293612/blissful-cleaning/70d6e66c-966e-46b8-9a28-df2f27288c78.png",
+  member3:      "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293615/blissful-cleaning/5defd2e1-199b-4e90-b795-bd2192780150.png",
+  member4:      "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293618/blissful-cleaning/68b8ab96-c865-4655-947b-61053b326ec1.png",
 };
 
 const teamMembers = [
-  { name: "Elza Rodrigues-Calandrello", role: "Owner & Head Cleaner", image: imgs.member1 },
-  { name: "Matthew Calandrello", role: "Projects Supervisor", image: imgs.member2 },
-  { name: "Rhayane Telles", role: "Cleaner", image: imgs.member3 },
-  { name: "Lauany Telles", role: "Cleaner", image: imgs.member4 },
+  { name: "Elza Rodrigues-Calandrello", role: "Owner & Head Cleaner",  image: imgs.member1 },
+  { name: "Matthew Calandrello",        role: "Projects Supervisor",   image: imgs.member2 },
+  { name: "Rhayane Telles",             role: "Cleaner",               image: imgs.member3 },
+  { name: "Lauany Telles",              role: "Cleaner",               image: imgs.member4 },
 ];
 
+// ─── Hero ──────────────────────────────────────────────────────────────────
 function AboutHero() {
   return (
     <section
-      className="relative overflow-hidden min-h-[841px]"
+      className="relative overflow-hidden"
       style={{
-        background: "linear-gradient(231deg, rgb(255,221,183) 3%, rgb(255,229,200) 45%, rgb(255,255,255) 98%)",
+        minHeight: 480,
+        backgroundImage:
+          "linear-gradient(231deg, rgb(255,221,183) 3%, rgb(255,229,200) 45%, rgb(255,255,255) 98%)",
       }}
     >
-      {/* Decorative ellipse */}
+      {/* Decorative background ellipse */}
       <img
         src={imgs.heroEllipse}
         alt=""
-        className="absolute right-[-100px] bottom-[-200px] w-[811px] h-[811px] object-contain opacity-40 pointer-events-none select-none"
+        className="absolute pointer-events-none select-none hidden lg:block"
+        style={{ width: 811, height: 811, right: "calc(50% - 811px)", bottom: -280, opacity: 0.45 }}
       />
 
-      <div className="max-w-[1440px] mx-auto px-20 flex items-center min-h-[841px] relative">
-        {/* Left content */}
-        <div className="flex flex-col gap-7 max-w-[622px] py-20 relative z-10">
-          {/* Headline */}
-          <h1 className="font-['Poppins',sans-serif] text-[60px] leading-[85px]">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-20 relative" style={{ minHeight: 480 }}>
+        {/* ── Left text column ── */}
+        <div className="flex flex-col gap-5 lg:gap-7 relative z-10 pt-10 lg:pt-[143px] pb-10 lg:pb-16 max-w-full lg:max-w-[622px]">
+          {/* Heading */}
+          <h1 className="font-['Poppins',sans-serif] m-0 text-3xl md:text-5xl lg:text-[60px] lg:leading-[85px]">
             <span className="font-semibold text-[#0f172a]">Built on Family,</span>
             <br />
             <span className="font-normal text-[#da1b61]">Driven by Care.</span>
           </h1>
 
           {/* Subtext */}
-          <p className="font-['Satoshi',sans-serif] text-black text-[24px] leading-[35px]">
+          <p className="font-['Satoshi',sans-serif] text-black m-0 text-base lg:text-[24px] lg:leading-[35px]">
             We aren&rsquo;t just a cleaning company. We are a family that
             understands the peace a clean home brings to yours. Every corner we
             scrub is handled with the same love we give our own home.
           </p>
 
           {/* Stats card */}
-          <div className="bg-white rounded-[10px] px-6 py-6 flex items-center gap-8 w-fit shadow-sm">
-            {/* Avatars */}
-            <div className="flex items-center">
-              <img src={imgs.avatarGroup} alt="Happy customers" className="h-[50px] object-contain" />
+          <div className="bg-white rounded-[10px] flex items-center shadow-sm w-fit flex-wrap gap-y-3" style={{ padding: "18px 20px", gap: 0 }}>
+            {/* Overlapping avatar circles */}
+            <div className="flex items-center shrink-0" style={{ width: 100 }}>
+              {[0, 1, 2].map((i) => (
+                <div
+                  key={i}
+                  className="rounded-full overflow-hidden border-2 border-white shrink-0"
+                  style={{
+                    width: 49,
+                    height: 49,
+                    marginLeft: i === 0 ? 0 : -14,
+                    zIndex: 3 - i,
+                    position: "relative",
+                    backgroundImage: `url('${imgs.avatarMask}')`,
+                    backgroundSize: "cover",
+                  }}
+                >
+                  <img
+                    src={imgs.avatarFaces}
+                    alt=""
+                    className="absolute inset-0 w-full h-full object-cover pointer-events-none"
+                  />
+                </div>
+              ))}
             </div>
 
             {/* Divider */}
-            <div className="w-px h-10 bg-gray-200" />
+            <div className="bg-gray-200 shrink-0" style={{ width: 1, height: 40, margin: "0 16px" }} />
 
-            {/* Stat 1 */}
-            <div>
-              <div className="font-['Inter',sans-serif] font-bold text-black text-base">50k+</div>
-              <div className="font-['Inter',sans-serif] text-black/65 text-sm">More Customers</div>
+            {/* Stat: customers */}
+            <div className="shrink-0" style={{ minWidth: 100 }}>
+              <div className="font-['Inter',sans-serif] font-bold text-black" style={{ fontSize: 16, lineHeight: "normal" }}>
+                50 k+
+              </div>
+              <div className="font-['Inter',sans-serif] text-black/65" style={{ fontSize: 14, lineHeight: "normal" }}>
+                More Customers
+              </div>
             </div>
 
             {/* Divider */}
-            <div className="w-px h-10 bg-gray-200" />
+            <div className="bg-gray-200 shrink-0" style={{ width: 1, height: 40, margin: "0 16px" }} />
 
-            {/* Stat 2 */}
-            <div>
-              <div className="font-['Inter',sans-serif] font-bold text-black text-base">12+</div>
-              <div className="font-['Inter',sans-serif] text-black/65 text-sm">Years of Experience</div>
+            {/* Stat: years */}
+            <div className="shrink-0" style={{ minWidth: 100 }}>
+              <div className="font-['Inter',sans-serif] font-bold text-black" style={{ fontSize: 16, lineHeight: "normal" }}>
+                12 +
+              </div>
+              <div className="font-['Inter',sans-serif] text-black/65" style={{ fontSize: 14, lineHeight: "normal" }}>
+                Years of Experience
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Right — team photo */}
-        <div className="absolute right-0 top-0 h-full w-[55%] hidden lg:block pointer-events-none select-none">
+        {/* ── Right team photo — desktop only ── */}
+        <div
+          className="absolute top-0 right-0 h-full hidden lg:block pointer-events-none select-none"
+          style={{ width: "55%" }}
+        >
           <img
             src={imgs.heroPeople}
             alt="Blissful Cleaning team"
-            className="absolute right-0 bottom-0 h-[95%] object-contain object-bottom"
+            className="absolute bottom-0 right-0 object-contain object-bottom"
+            style={{ height: "92%" }}
           />
         </div>
       </div>
@@ -97,39 +130,49 @@ function AboutHero() {
   );
 }
 
+// ─── Story + Quote ─────────────────────────────────────────────────────────
 function StoryQuote() {
   return (
-    <section className="py-20 bg-[#fbfbfb]">
-      <div className="max-w-[1440px] mx-auto px-20 flex flex-col lg:flex-row gap-10 items-stretch">
+    <section className="bg-[#fbfbfb] py-10 lg:py-20">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-20 flex flex-col lg:flex-row items-stretch gap-6 lg:gap-0">
         {/* Left — team photo */}
-        <div className="flex-1 max-w-[640px] w-full rounded-[10px] overflow-hidden min-h-[420px]">
+        <div className="rounded-[10px] overflow-hidden w-full lg:w-[600px] lg:shrink-0" style={{ minHeight: 280 }}>
           <img
-            src={imgs.teamPhoto}
+            src={imgs.storyPhoto}
             alt="Blissful Cleaning team at work"
-            className="w-full h-full object-cover min-h-[420px] rounded-[10px]"
+            className="w-full h-full object-cover"
+            style={{ minHeight: 280 }}
           />
         </div>
 
         {/* Right — quote card */}
-        <div className="flex-1 flex items-center">
-          <div className="bg-[rgba(241,243,223,0.79)] rounded-[10px] px-12 py-14 relative w-full">
-            {/* Opening quote mark */}
+        <div className="flex flex-col justify-center relative lg:flex-1 lg:-ml-[60px]">
+          <div
+            className="rounded-[10px] relative flex flex-col justify-center px-6 py-10 lg:px-12 lg:py-[60px]"
+            style={{ background: "rgba(241,243,223,0.79)", minHeight: 280 }}
+          >
+            {/* Opening quotation mark */}
             <img
               src={imgs.quoteOpen}
               alt=""
-              className="w-11 h-11 mb-4 rotate-180 scale-y-[-1]"
+              className="absolute"
+              style={{ width: 36, height: 36, top: 24, left: 24, transform: "rotate(180deg) scaleY(-1)" }}
             />
 
             {/* Quote text */}
-            <blockquote className="font-['Poppins',sans-serif] font-semibold italic text-[24px] text-black leading-[40px]">
-              &ldquo;At Blissful Cleaning, we don&rsquo;t just clean homes we care for them like they&rsquo;re our own.&rdquo;
+            <blockquote
+              className="font-['Poppins',sans-serif] font-semibold italic text-black m-0 text-base lg:text-[24px] lg:leading-[40px] px-4 lg:px-5"
+            >
+              &ldquo;At Blissful Cleaning, we don&rsquo;t just clean homes&nbsp;—
+              we care for them like they&rsquo;re our own.&rdquo;
             </blockquote>
 
-            {/* Closing quote mark */}
+            {/* Closing quotation mark */}
             <img
               src={imgs.quoteClose}
               alt=""
-              className="w-11 h-11 mt-4 ml-auto block"
+              className="absolute"
+              style={{ width: 36, height: 36, bottom: 24, right: 24 }}
             />
           </div>
         </div>
@@ -138,23 +181,24 @@ function StoryQuote() {
   );
 }
 
+// ─── Meet Our Team ─────────────────────────────────────────────────────────
 function TeamSection() {
   return (
-    <section className="py-16 bg-[#fbfbfb]">
-      <div className="max-w-[1440px] mx-auto px-20">
+    <section className="bg-[#fbfbfb] py-10 lg:py-16">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-20">
         {/* Header */}
-        <div className="flex flex-col items-center text-center mb-12">
-          <h2 className="font-['Poppins',sans-serif] font-semibold text-[36px] text-[#0f172a]">
-            Meet{" "}
+        <div className="flex flex-col items-center text-center mb-8 lg:mb-12">
+          <h2 className="font-['Poppins',sans-serif] font-semibold text-[#0f172a] m-0 text-2xl md:text-3xl lg:text-[36px] lg:leading-[72px]">
+            Meet&nbsp;&nbsp;
             <span className="font-normal text-[#da1b61]">our Team</span>
           </h2>
-          <p className="font-['Satoshi',sans-serif] text-black text-base mt-2">
+          <p className="font-['Satoshi',sans-serif] text-black m-0 text-base" style={{ lineHeight: "26px" }}>
             The smiling faces behind your spotless home.
           </p>
         </div>
 
-        {/* Team grid */}
-        <div className="flex flex-wrap justify-center gap-[66px]">
+        {/* Cards — 2 columns on mobile, 4 on lg */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-[66px] justify-items-center">
           {teamMembers.map((member) => (
             <TeamMemberCard key={member.name} {...member} />
           ))}
@@ -166,36 +210,51 @@ function TeamSection() {
 
 function TeamMemberCard({ name, role, image }) {
   return (
-    <div className="flex flex-col items-center gap-1.5">
-      <div className="w-[250px] h-[250px] rounded-[10px] overflow-hidden">
+    <div className="flex flex-col items-center gap-1.5 w-full max-w-[250px]">
+      {/* Photo */}
+      <div className="rounded-[10px] overflow-hidden shrink-0 w-full" style={{ aspectRatio: "1 / 1" }}>
         <img src={image} alt={name} className="w-full h-full object-cover" />
       </div>
-      <h3 className="font-['Poppins',sans-serif] font-medium text-[#0f172a] text-xl mt-2 text-center">
+
+      {/* Name */}
+      <h3 className="font-['Poppins',sans-serif] font-medium text-[#0f172a] text-center m-0 mt-2 text-sm lg:text-[20px] lg:leading-[28px]">
         {name}
       </h3>
-      <span className="font-['Inter',sans-serif] font-medium text-[#da1b61] text-sm tracking-[0.35px] uppercase">
+
+      {/* Role */}
+      <span className="font-['Inter',sans-serif] font-medium text-[#da1b61] uppercase tracking-[0.35px] text-xs lg:text-[14px] lg:leading-[20px] text-center">
         {role}
       </span>
     </div>
   );
 }
 
+// ─── A Legacy of Sparkle ───────────────────────────────────────────────────
 function LegacySection() {
   return (
     <section
-      className="py-16"
       style={{
-        background: "linear-gradient(230deg, rgb(255,255,255) 1%, rgb(255,222,185) 164%)",
+        backgroundImage:
+          "linear-gradient(229.77deg, rgb(255,255,255) 0.6%, rgb(255,222,185) 164%)",
       }}
+      className="py-10 lg:py-[60px]"
     >
-      <div className="max-w-[1440px] mx-auto px-[123px]">
-        <div className="flex flex-col gap-6 max-w-[1197px]">
-          <h2 className="font-['Poppins',sans-serif] font-medium text-[32px]">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[123px]">
+        <div className="flex flex-col gap-4 lg:gap-[23px] max-w-[1197px]">
+          {/* Heading */}
+          <h2 className="font-['Poppins',sans-serif] font-medium m-0 text-2xl md:text-3xl lg:text-[32px] lg:leading-[72px]">
             <span className="text-[#da1b61]">A Legacy of </span>
             <span className="text-[#b6c334]">Sparkle</span>
           </h2>
-          <p className="font-['Plus_Jakarta_Sans',sans-serif] text-[#475569] text-[18px] leading-[29px]">
-            Starting in a small garage in 2012, Blissful Cleaning began with a simple mop and a big dream. Our founder, Maria, started this journey to provide for her children while helping neighbors find time for what matters most. Today, we&rsquo;ve grown into a full team, but our core remains unchanged. We treat every employee like family and every client like a guest of honor.
+
+          {/* Body */}
+          <p className="font-['Plus_Jakarta_Sans',sans-serif] font-normal text-[#475569] m-0 text-base lg:text-[18px] lg:leading-[29.25px]">
+            Starting in a small garage in 2012, Blissful Cleaning began with a
+            simple mop and a big dream. Our founder, Maria, started this journey
+            to provide for her children while helping neighbors find time for
+            what matters most. Today, we&rsquo;ve grown into a full team, but
+            our core remains unchanged. We treat every employee like family and
+            every client like a guest of honor.
           </p>
         </div>
       </div>
@@ -203,6 +262,7 @@ function LegacySection() {
   );
 }
 
+// ─── Page ──────────────────────────────────────────────────────────────────
 export default function AboutPage() {
   return (
     <>

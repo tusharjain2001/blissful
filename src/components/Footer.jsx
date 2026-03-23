@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
 const imgs = {
-  phoneIcon: "https://www.figma.com/api/mcp/asset/8f2036f5-e7fd-4939-80b4-f7785e05d3cc",
-  emailIcon: "https://www.figma.com/api/mcp/asset/74840394-5d1c-454c-b987-50ff3d69bc8a",
-  locationIcon: "https://www.figma.com/api/mcp/asset/0da16a84-548b-4df1-b5f1-ac42e440939d",
-  fbIcon: "https://www.figma.com/api/mcp/asset/1897ea8b-12e1-4fb9-8024-47deddeec5b2",
-  twitterIcon: "https://www.figma.com/api/mcp/asset/cb2569c2-153d-4988-8f44-685ba668a666",
-  igIcon: "https://www.figma.com/api/mcp/asset/ec7d0e53-d842-42b5-9e84-f3a0c1be86c2",
+  phoneIcon: "https://res.cloudinary.com/dgr33gxhd/raw/upload/v1774293580/blissful-cleaning/8f2036f5-e7fd-4939-80b4-f7785e05d3cc",
+  emailIcon: "https://res.cloudinary.com/dgr33gxhd/raw/upload/v1774293582/blissful-cleaning/74840394-5d1c-454c-b987-50ff3d69bc8a",
+  locationIcon: "https://res.cloudinary.com/dgr33gxhd/raw/upload/v1774293584/blissful-cleaning/0da16a84-548b-4df1-b5f1-ac42e440939d",
+  fbIcon: "https://res.cloudinary.com/dgr33gxhd/raw/upload/v1774293585/blissful-cleaning/1897ea8b-12e1-4fb9-8024-47deddeec5b2",
+  twitterIcon: "https://res.cloudinary.com/dgr33gxhd/raw/upload/v1774293587/blissful-cleaning/cb2569c2-153d-4988-8f44-685ba668a666",
+  igIcon: "https://res.cloudinary.com/dgr33gxhd/raw/upload/v1774293589/blissful-cleaning/ec7d0e53-d842-42b5-9e84-f3a0c1be86c2",
 };
 
 const quickLinks = [

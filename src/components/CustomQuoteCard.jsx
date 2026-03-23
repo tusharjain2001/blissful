@@ -1,8 +1,8 @@
-const sparkIcon = "https://www.figma.com/api/mcp/asset/efe80d3a-ce51-4401-b112-5b27f81cdee6";
+const sparkIcon = "https://res.cloudinary.com/dgr33gxhd/raw/upload/v1774293579/blissful-cleaning/efe80d3a-ce51-4401-b112-5b27f81cdee6";
 
 export default function CustomQuoteCard() {
   return (
-    <div className="bg-[rgba(248,248,248,0.28)] border-2 border-dashed border-[rgba(218,27,97,0.2)] rounded-[10px] w-[354px] h-[471px] flex flex-col items-center justify-center px-8 py-24">
+    <div className="bg-[rgba(248,248,248,0.28)] border-2 border-dashed border-[rgba(218,27,97,0.2)] rounded-[10px] w-full md:w-[354px] h-auto md:h-[471px] flex flex-col items-center justify-center px-8 py-12 md:py-24">
       {/* Icon */}
       <div className="bg-[#b6c334] rounded-full w-16 h-16 flex items-center justify-center mb-4">
         <img src={sparkIcon} alt="" className="w-7 h-6" />

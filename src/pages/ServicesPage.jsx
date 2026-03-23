@@ -4,9 +4,9 @@ import CustomQuoteCard from "../components/CustomQuoteCard";
 import CTABanner from "../components/CTABanner";
 
 const serviceImages = {
-  standard: "https://www.figma.com/api/mcp/asset/85aa9ed6-3528-44d3-bf93-1d6fa689cb06",
-  deep: "https://www.figma.com/api/mcp/asset/6cbc4d07-f436-4399-9ebb-4025e936e2d6",
-  moveInOut: "https://www.figma.com/api/mcp/asset/f6de5ca0-5886-47ff-85c2-e4621edacc4c",
+  standard: "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293695/blissful-cleaning/85aa9ed6-3528-44d3-bf93-1d6fa689cb06.png",
+  deep: "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293698/blissful-cleaning/6cbc4d07-f436-4399-9ebb-4025e936e2d6.png",
+  moveInOut: "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293701/blissful-cleaning/f6de5ca0-5886-47ff-85c2-e4621edacc4c.png",
 };
 
 const cleaningServices = [
@@ -87,24 +87,24 @@ export default function ServicesPage() {
       }}
     >
       {/* Our Cleaning Services Section */}
-      <section className="pt-20 pb-12">
-        <div className="max-w-[1440px] mx-auto px-[72px]">
-          <div className="flex flex-col items-center gap-12">
+      <section className="pt-10 lg:pt-20 pb-8 lg:pb-12">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[72px]">
+          <div className="flex flex-col items-center gap-8 lg:gap-12">
             <SectionHeader
               title="Our Cleaning"
               highlight="Services"
               description={sectionDescription}
             />
 
-            {/* First row - 3 service cards */}
-            <div className="flex flex-wrap justify-center gap-[52px]">
+            {/* First row - service cards */}
+            <div className="flex flex-col md:flex-row flex-wrap justify-center gap-6 lg:gap-[52px] w-full">
               {cleaningServices.map((service) => (
                 <ServiceCard key={service.title} {...service} />
               ))}
             </div>
 
             {/* Second row - 2 service cards + custom quote */}
-            <div className="flex flex-wrap justify-center items-end gap-[52px]">
+            <div className="flex flex-col md:flex-row flex-wrap justify-center items-stretch md:items-end gap-6 lg:gap-[52px] w-full">
               {additionalServices.map((service) => (
                 <ServiceCard key={service.title} {...service} />
               ))}
@@ -115,9 +115,9 @@ export default function ServicesPage() {
       </section>
 
       {/* Daily Plans Section */}
-      <section className="py-12">
-        <div className="max-w-[1440px] mx-auto px-[72px]">
-          <div className="flex flex-col items-center gap-12">
+      <section className="py-8 lg:py-12">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[72px]">
+          <div className="flex flex-col items-center gap-8 lg:gap-12">
             <SectionHeader
               title="Daily"
               highlight="plans"
@@ -125,7 +125,7 @@ export default function ServicesPage() {
             />
 
             {/* Plan cards */}
-            <div className="flex flex-wrap justify-center gap-[52px]">
+            <div className="flex flex-col md:flex-row flex-wrap justify-center gap-6 lg:gap-[52px] w-full">
               {dailyPlans.map((plan) => (
                 <ServiceCard key={plan.title} {...plan} />
               ))}
