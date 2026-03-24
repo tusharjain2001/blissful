@@ -1,6 +1,22 @@
 // Image assets from Figma
 import heroRight from "../assets/hero-right.svg";
 import heroEx from "../assets/hero-excellent.svg";
+import pet from "../assets/pet.svg";
+import reliable from "../assets/reliable.svg";
+import familyowned from "../assets/familyowned.svg";
+import highquality from "../assets/highquality.svg";
+import blackarrow from "../assets/blackarrow.svg";
+import deepcleaning from "../assets/deepcleaning.svg";
+import standardcleaning from "../assets/standardcleaning.svg";
+import thirdcleaning from "../assets/thirdcleaning.svg";
+import difference from "../assets/difference.svg";
+import reviewss from "../assets/reviews.svg";
+import elena from "../assets/elena.svg";
+import quote from "../assets/quote.svg";
+import sarah from "../assets/sarah.svg";
+import michael from "../assets/michael.svg";
+import approved from "../assets/approved.svg";
+
 const imgs = {
   heroPerson:
     "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293639/blissful-cleaning/08739f6f-0b14-4c8e-961f-12a76bfca771.png",
@@ -94,10 +110,8 @@ function Hero() {
               Contact us (774-388-6228)
             </button>
           </div>
-          <div className="flex flex-col gap-1 mt-2">
-            <div className="flex items-center gap-2">
-              <img src={heroEx} />
-            </div>
+          <div className="flex w-fit rounded-[10px] gap-1 mt-2 p-4 bg-white ">
+            <img src={heroEx} />
           </div>
         </div>
         {/* Hero image — hidden on mobile, shown on lg+ */}
@@ -112,25 +126,25 @@ function Hero() {
 function FeaturesBar() {
   const features = [
     {
-      icon: imgs.qualityIcon,
+      icon: highquality,
       title: "High-Quality",
       desc: "Meticulous attention to detail in every single room.",
       iconBg: "bg-transparent",
     },
     {
-      icon: imgs.familyIcon,
+      icon: familyowned,
       title: "Family-Owned",
       desc: "Trusted local service with personal values at our core.",
       iconBg: "bg-[#b6c334]",
     },
     {
-      icon: imgs.petIcon,
+      icon: pet,
       title: "Pet-Friendly",
       desc: "Safe cleaning products for your furry family members.",
       iconBg: "bg-[#b6c334]",
     },
     {
-      icon: imgs.reliableIcon,
+      icon: reliable,
       title: "Reliable",
       desc: "Meticulous attention to detail in every single room.",
       iconBg: "bg-[#b6c334]",
@@ -138,19 +152,15 @@ function FeaturesBar() {
   ];
 
   return (
-    <section className="bg-white py-10 border-b border-gray-100">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-10">
+    <section className="bg-white py-10">
+      <div className="px-4 md:px-24">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           {features.map((f) => (
             <div key={f.title} className="flex items-start gap-3 lg:gap-5">
               <div
                 className={`rounded-[10px] w-[50px] h-[50px] lg:w-[70px] lg:h-[70px] shrink-0 flex items-center justify-center ${f.iconBg}`}
               >
-                <img
-                  src={f.icon}
-                  alt={f.title}
-                  className="w-7 h-7 lg:w-9 lg:h-9 object-contain"
-                />
+                <img src={f.icon} alt={f.title} className="" />
               </div>
               <div>
                 <h3 className="font-['Poppins',sans-serif] font-semibold text-black text-base lg:text-xl">
@@ -254,18 +264,18 @@ function Services() {
     {
       title: "Standard Cleaning",
       desc: "Perfect for maintaining a tidy home on a regular basis. Includes dusting, vacuuming, mopping, and surface sanitization.",
-      image: imgs.service1,
+      image: standardcleaning,
       badge: "Popular",
     },
     {
       title: "Deep Cleaning",
       desc: "A thorough top-to-bottom scrub for a spotless living space. We reach the areas often missed during routine cleaning.",
-      image: imgs.service2,
+      image: deepcleaning,
     },
     {
       title: "Move In/Out Cleaning",
       desc: "Specialized cleaning for transitions. We ensure your new home is ready for you or your old home is ready for its next residents.",
-      image: imgs.service3,
+      image: thirdcleaning,
     },
   ];
 
@@ -277,20 +287,20 @@ function Services() {
           "linear-gradient(131deg, rgb(255,222,185) 14%, rgb(255,239,220) 66%, rgb(255,255,255) 141%)",
       }}
     >
-      <div className="max-w-[1440px] mx-auto px-4 md:px-10">
+      <div className="px-4 md:px-10">
         <div className="flex flex-col items-center text-center mb-8 lg:mb-12">
-          <div className="bg-white rounded-[10px] px-6 h-9 inline-flex items-center mb-3">
-            <span className="font-['Poppins',sans-serif] text-[#0f172a] text-base">
+          <div className="bg-white rounded-[10px] px-12 h-9 inline-flex items-center mb-3">
+            <span className="font-['Poppins',sans-serif] text-[#0F172A] text-[20px]">
               our services
             </span>
           </div>
-          <h2 className="font-['Poppins',sans-serif] font-semibold text-2xl md:text-[32px] text-[#0f172a]">
+          <h2 className="font-['Poppins',sans-serif] font-semibold text-2xl md:text-[36px] text-[#0f172a]">
             Explore our{" "}
             <span className="text-[#da1b61]">cleaning Services</span>
           </h2>
-          <button className="flex items-center gap-1 border-b border-black text-black/65 font-['Poppins',sans-serif] text-sm mt-2 pb-0.5 hover:text-[#da1b61] hover:border-[#da1b61] transition-colors cursor-pointer bg-transparent">
+          <button className="flex items-center gap-1 border-b border-black text-[#000000A6] font-['Poppins',sans-serif] text-[16px] mt-2 pb-0.5 cursor-pointer">
             Know More
-            <img src={imgs.arrowIcon} alt="" className="w-4 h-4 rotate-90" />
+            <img src={blackarrow} alt="" className="w-4 h-4 " />
           </button>
         </div>
         <div className="flex flex-col md:flex-row flex-wrap justify-center gap-6 lg:gap-10">
@@ -303,28 +313,12 @@ function Services() {
                 <h3 className="font-['Poppins',sans-serif] font-medium text-[#da1b61] text-xl mb-2">
                   {s.title}
                 </h3>
-                <p className="font-['Inter',sans-serif] text-[#475569] text-sm leading-relaxed">
+                <p className="font-['Inter',sans-serif] text-[#475569] text-[16px] leading-relaxed">
                   {s.desc}
                 </p>
               </div>
-              <div className="relative bg-[#e5e7a5] flex-1">
-                <img
-                  src={s.image}
-                  alt={s.title}
-                  className="w-full h-[200px] object-cover"
-                />
-                {s.badge && (
-                  <div className="absolute top-3 right-4 backdrop-blur-sm bg-white/90 text-[#da1b61] text-xs font-bold px-3 py-0.5 rounded-full shadow-sm">
-                    {s.badge}
-                  </div>
-                )}
-                <div className="absolute bottom-3 right-3 bg-white rounded-[10px] w-9 h-9 flex items-center justify-center shadow-sm cursor-pointer hover:bg-[#da1b61] group transition-colors">
-                  <img
-                    src={imgs.arrowIcon}
-                    alt=""
-                    className="w-5 h-5 rotate-[135deg] group-hover:invert"
-                  />
-                </div>
+              <div className=" bg-white flex-1">
+                <img src={s.image} alt={s.title} className="pb-6" />
               </div>
             </div>
           ))}
@@ -335,19 +329,12 @@ function Services() {
 }
 
 function BeforeAfter() {
-  const pairs = [
-    { img: imgs.beforeAfter1, wide: true },
-    { img: imgs.beforeAfter2, wide: false },
-    { img: imgs.beforeAfter3, wide: false },
-    { img: imgs.beforeAfter4, wide: true },
-  ];
-
   return (
     <section className="py-10 lg:py-20 bg-white">
       <div className="max-w-[1440px] mx-auto px-4 md:px-10">
         <div className="flex flex-col items-center text-center mb-8 lg:mb-14">
-          <div className="bg-[#f4f5cd] rounded-[10px] px-6 h-9 inline-flex items-center mb-3">
-            <span className="font-['Poppins',sans-serif] text-[#0f172a] text-base">
+          <div className="bg-[#f4f5cd] rounded-[10px] px-12 h-9 inline-flex items-center mb-3">
+            <span className="font-['Poppins',sans-serif] text-[#0f172a] text-[20px]">
               See the Difference
             </span>
           </div>
@@ -360,25 +347,7 @@ function BeforeAfter() {
           </p>
         </div>
         <div className="flex flex-col md:flex-wrap md:flex-row gap-6 lg:gap-8 justify-center">
-          {pairs.map((p, i) => (
-            <div
-              key={i}
-              className="relative rounded-[10px] overflow-hidden group w-full md:flex-1"
-              style={{ minHeight: 220 }}
-            >
-              <img
-                src={p.img}
-                alt={`Before and after ${i + 1}`}
-                className="w-full h-full object-cover min-h-[220px] md:min-h-[320px]"
-              />
-              <div className="absolute top-4 left-5 bg-white border border-[#da1b61] text-[#da1b61] font-['Poppins',sans-serif] text-sm px-4 h-8 flex items-center rounded-[10px]">
-                Before
-              </div>
-              <div className="absolute top-4 right-5 bg-[#da1b61] text-white font-['Poppins',sans-serif] text-sm px-4 h-8 flex items-center rounded-[10px]">
-                After
-              </div>
-            </div>
-          ))}
+          <img src={difference} />
         </div>
       </div>
     </section>
@@ -391,63 +360,53 @@ function Reviews() {
       text: '"Blissful Cleaning transformed my apartment before I moved out. It looked better than when I first moved in! Highly recommend."',
       name: "Sarah Jenkins",
       location: "Evanston, IL",
+      imagee: sarah,
     },
     {
       text: '"The recurring service is a lifesaver for our busy family. They are so careful around our pets and everything smells so fresh."',
       name: "Michael Ross",
       location: "Evanston, IL",
+      imagee: michael,
     },
     {
       text: '"Professional, punctual, and very thorough. The deep cleaning service reached places I didn\'t even think to check."',
       name: "Elena Rodriguez",
       location: "Oak Park, IL",
+      imagee: elena,
     },
   ];
 
   return (
-    <section className="py-10 lg:py-20 bg-[#fbfbfb]">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-10">
+    <section className="py-10 lg:py-20">
+      <div className="px-4 md:px-10">
         <div className="flex flex-col items-center text-center mb-8 lg:mb-12">
-          <div className="bg-[#f4f5cd] rounded-[10px] px-6 h-9 inline-flex items-center mb-3">
-            <span className="font-['Poppins',sans-serif] text-[#0f172a] text-base">
+          <div className="bg-[#f4f5cd] rounded-[10px] px-12 h-9 inline-flex items-center mb-3">
+            <span className="font-['Poppins',sans-serif] text-[#0f172a] text-[20px]">
               Customer Reviews
             </span>
           </div>
-          <h2 className="font-['Poppins',sans-serif] text-2xl md:text-[32px] text-[#0f172a] mb-2">
+          <h2 className="font-['Poppins',sans-serif] text-2xl md:text-[36px] text-[#0f172a] mb-2">
             <span>Happy </span>
             <span className="text-[#da1b61]">Home owners</span>
           </h2>
           <div className="flex items-center gap-2">
-            <div className="flex gap-1">
-              {[...Array(5)].map((_, i) => (
-                <svg
-                  key={i}
-                  className="w-5 h-5 text-yellow-400 fill-yellow-400"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              ))}
-            </div>
-            <span className="font-['Inter',sans-serif] font-bold text-[#0f172a] text-sm">
-              4.9/5 based on 2k+ reviews
-            </span>
+            <img src={reviewss} />
           </div>
         </div>
         <div className="flex flex-col md:flex-row flex-wrap justify-center gap-6 lg:gap-8">
           {reviews.map((r) => (
             <div
               key={r.name}
-              className="bg-[#e5e7a5] rounded-[10px] p-6 lg:p-7 flex flex-col gap-4 w-full md:w-[340px] lg:w-[380px]"
+              className="bg-[#e5e7a5] rounded-[10px] p-6 lg:p-7 flex flex-col items-center  gap-4 w-full md:w-[400px]"
             >
-              <img src={imgs.quoteIcon} alt="" className="w-7 h-5" />
-              <p className="font-['Inter',sans-serif] text-[#0f172a] text-sm text-center leading-relaxed">
+              <img src={quote} alt="" className="w-7 h-5" />
+              <p className="font-['Inter',sans-serif] text-[#0f172a] text-[16px] text-center leading-relaxed">
                 {r.text}
               </p>
               <div className="flex flex-col items-center gap-1 mt-2">
-                <div className="w-12 h-12 rounded-full bg-[#b6c334] overflow-hidden">
+                <div className="w-12 h-12 rounded-[10px]">
                   <img
-                    src={imgs.reviewAvatar}
+                    src={r.imagee}
                     alt={r.name}
                     className="w-full h-full object-cover"
                   />
@@ -488,15 +447,15 @@ function Disinfection() {
         </div>
         <div className="flex flex-col gap-4">
           <div className="bg-[#b6c334] flex items-center gap-2 px-3 py-1 rounded-[10px] w-fit">
-            <img src={imgs.epaIcon} alt="EPA" className="w-3 h-3" />
+            <img src={approved} alt="EPA" className="" />
             <span className="font-['Inter',sans-serif] font-medium text-white text-sm">
               EPA APPROVED
             </span>
           </div>
-          <h2 className="font-['Poppins',sans-serif] text-2xl md:text-[32px] text-[#0f172a] leading-tight">
+          <h2 className="font-['Poppins',sans-serif] text-2xl md:text-[36px] text-[#0f172a] leading-tight">
             Advanced Viral Disinfection
           </h2>
-          <p className="font-['Inter',sans-serif] text-black/65 text-base lg:text-lg leading-relaxed max-w-4xl">
+          <p className="font-['Inter',sans-serif] text-black/65 text-base md:text-[20px] leading-relaxed">
             Protect your family with our hospital-grade electrostatic spraying
             technology. Kills 99.9% of bacteria and viruses on all surfaces.
           </p>
