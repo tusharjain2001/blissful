@@ -16,6 +16,10 @@ import quote from "../assets/quote.svg";
 import sarah from "../assets/sarah.svg";
 import michael from "../assets/michael.svg";
 import approved from "../assets/approved.svg";
+import professional from "../assets/professional.svg";
+import whitearrow from "../assets/white-arrow.svg";
+import cleanwithgroup from "../assets/cleanwithgroup.svg";
+import manclean from "../assets/manclean.svg";
 
 const imgs = {
   heroPerson:
@@ -181,7 +185,7 @@ function FeaturesBar() {
 function WhyChooseUs() {
   const benefits = [
     {
-      icon: imgs.professionalIcon,
+      icon: professional,
       title: "Professional Staff",
       desc: "Background-checked and highly trained cleaning experts.",
     },
@@ -198,17 +202,13 @@ function WhyChooseUs() {
   ];
 
   return (
-    <section className="py-10 lg:py-20 bg-white">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-10 flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
-        <div
-          className="flex-1 rounded-[10px] overflow-hidden w-full lg:max-w-[640px]"
-          style={{ minHeight: 280 }}
-        >
+    <section className="py-10 lg:py-20 bg-white min-h-[70vh]">
+      <div className="px-4 md:px-10 flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
+        <div className="flex-1 rounded-[10px] overflow-hidden w-full">
           <img
-            src={imgs.aboutPhoto}
+            src={cleanwithgroup}
             alt="Cleaning professional at work"
             className="w-full h-full object-cover rounded-[10px]"
-            style={{ minHeight: 280 }}
           />
         </div>
         <div className="flex-1 flex flex-col gap-6 lg:gap-8">
@@ -219,7 +219,7 @@ function WhyChooseUs() {
               </span>
             </div>
             <h2 className="font-['Poppins',sans-serif] text-2xl md:text-3xl lg:text-[42px] font-semibold text-[#0f172a] leading-tight">
-              Cleaning with Care,{" "}
+              Cleaning with Care,<br></br>
               <span className="font-normal text-[#da1b61]">Like Family</span>
             </h2>
             <p className="font-['Inter',sans-serif] text-black text-base mt-4 leading-relaxed">
@@ -251,7 +251,7 @@ function WhyChooseUs() {
           </div>
           <button className="flex items-center gap-2 bg-[#da1b61] text-white font-['Poppins',sans-serif] text-base px-8 py-4 rounded-[10px] w-fit hover:bg-[#c01850] transition-colors cursor-pointer">
             Know More
-            <img src={imgs.arrowIcon} alt="" className="w-5 h-5 rotate-90" />
+            <img src={whitearrow} alt="" className="w-3 h-3 " />
           </button>
         </div>
       </div>
@@ -435,15 +435,10 @@ function Disinfection() {
           style={{ aspectRatio: "16/9" }}
         >
           <img
-            src={imgs.videoBg}
+            src={manclean}
             alt="Advanced Viral Disinfection"
             className="w-full h-full object-cover opacity-80"
           />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <button className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-full w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center hover:bg-white/30 transition-colors cursor-pointer">
-              <img src={imgs.playBtn} alt="Play" className="w-4 h-5 ml-1" />
-            </button>
-          </div>
         </div>
         <div className="flex flex-col gap-4">
           <div className="bg-[#b6c334] flex items-center gap-2 px-3 py-1 rounded-[10px] w-fit">
