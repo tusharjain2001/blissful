@@ -20,48 +20,24 @@ const faqs = [
   {
     category: "General",
     question: "Are your cleaning products safe for pets?",
-    answer: "Hello",
+    answer: "Yes, our cleaning methods are safe for both your family and your pets. We take extra care to use products and techniques that ensure a clean and comfortable environment for everyone in your home.",
   },
   {
     category: "General",
     question: "Do I need to be home during the cleaning?",
-    answer: "Hello",
+    answer: "No, you don’t need to be home during the cleaning. Many of our clients provide access instructions in advance, and our team handles the rest with care and professionalism.",
   },
   {
-    category: "Pricing & Booking",
+    category: "General",
     question: "How do I change or cancel my booking?",
-    answer: "Hello",
+    answer: "If you need to reschedule or cancel your booking, simply contact us as soon as possible via phone or email. We’ll be happy to assist you with any changes.",
   },
   {
     category: "General",
     question: "What is your 100% satisfaction guarantee?",
-    answer: "Hello",
+    answer: "Your satisfaction is our top priority. If you’re not completely happy with the service, let us know, and we’ll make it right by addressing your concerns promptly.",
   },
-  {
-    category: "Services",
-    question: "What types of cleaning services do you offer?",
-    answer: "Hello",
-  },
-  {
-    category: "Services",
-    question: "Do you offer deep cleaning services?",
-    answer: "Hello",
-  },
-  {
-    category: "Pricing & Booking",
-    question: "How is pricing determined?",
-    answer: "Hello",
-  },
-  {
-    category: "Pet Friendly",
-    question: "Are your cleaners trained to work around pets?",
-    answer: "Hello",
-  },
-  {
-    category: "Safety",
-    question: "Are your cleaners background checked?",
-    answer: "Hello",
-  },
+
 ];
 
 // ─── Accordion item ─────────────────────────────────────────────────────────
