@@ -85,13 +85,52 @@ import CTABanner from "../components/CTABanner";
 function Hero() {
   return (
     <section
-      className=""
+      className="overflow-hidden"
       style={{
         background:
           "linear-gradient(236deg, rgb(255,221,183) 3%, rgb(255,229,200) 45%, rgb(255,255,255) 97%)",
       }}
     >
-      <div className="px-4 md:px-10 flex items-center justify-between ">
+      {/* Mobile layout */}
+      <div className="relative lg:hidden px-5 pt-8 pb-12 min-h-[620px]">
+        <div className="relative z-10 max-w-[240px]">
+          <h1 className="font-['Poppins',sans-serif] text-[34px] leading-[1.1] font-bold whitespace-nowrap">
+            <span className="text-[#0f172a]">Blissful </span>
+            <span className="text-[#da1b61] font-normal">cleaning</span>
+          </h1>
+
+          <h2 className="font-['Poppins',sans-serif] text-[22px] leading-[1.2] font-medium text-black mt-2 whitespace-nowrap">
+            &ldquo;Home Clean Home&rdquo;
+          </h2>
+
+          <p className="font-['Inter',sans-serif] text-[18px] text-black/80 leading-[1.5] mt-6">
+            Home Clean Home. We bring professional care and a sparkling touch to
+            every corner of your residence.
+          </p>
+
+          <div className="mt-8 flex flex-col gap-3 max-w-[230px]">
+            <button className="border-2 border-[#da1b61] text-[#da1b61] font-['Poppins',sans-serif] text-[16px] font-medium px-4 py-3 rounded-[10px] bg-transparent text-left hover:bg-[#da1b61]/5 transition-colors cursor-pointer">
+              Contact us (774-388-6228)
+            </button>
+
+            <button className="bg-[#da1b61] text-white font-['Poppins',sans-serif] text-[16px] font-medium px-4 py-3 rounded-[10px] hover:bg-[#c01850] transition-colors cursor-pointer text-left">
+              Book an Appointment
+            </button>
+          </div>
+
+          <div className="flex w-fit rounded-[10px] gap-1 mt-4 p-3 bg-white shadow-sm">
+            <img src={heroEx} alt="reviews" className="h-auto w-[180px]" />
+          </div>
+        </div>
+
+        {/* Mobile hero image */}
+        <div className="absolute bottom-0 right-[-70px] w-[310px] pointer-events-none select-none">
+          <img src={heroRight} alt="Cleaning lady" className="w-full h-auto" />
+        </div>
+      </div>
+
+      {/* Desktop layout — unchanged */}
+      <div className="hidden lg:flex px-4 md:px-10 items-center justify-between">
         <div className="flex flex-col gap-5 lg:gap-7 w-full py-10 lg:py-20 z-10">
           <div>
             <h1 className="font-['Poppins',sans-serif] text-[40px] md:text-[56px] lg:text-[64px] leading-tight font-bold">
@@ -102,10 +141,12 @@ function Hero() {
               &ldquo;Home Clean Home&rdquo;
             </h2>
           </div>
+
           <p className="font-['Inter',sans-serif] text-base lg:text-[18px] text-black/80 leading-[1.6]">
             Home Clean Home. We bring professional care and a sparkling touch to
             every corner of your residence.
           </p>
+
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 lg:gap-4">
             <button className="bg-[#da1b61] text-white font-['Poppins',sans-serif] text-base font-medium px-8 py-4 rounded-[10px] hover:bg-[#c01850] transition-colors cursor-pointer">
               Book an Appointment
@@ -114,19 +155,19 @@ function Hero() {
               Contact us (774-388-6228)
             </button>
           </div>
-          <div className="flex w-fit rounded-[10px] gap-1 mt-2 p-4 bg-white ">
-            <img src={heroEx} />
+
+          <div className="flex w-fit rounded-[10px] gap-1 mt-2 p-4 bg-white">
+            <img src={heroEx} alt="reviews" />
           </div>
         </div>
-        {/* Hero image — hidden on mobile, shown on lg+ */}
+
         <div className="hidden lg:block pointer-events-none select-none">
-          <img src={heroRight} />
+          <img src={heroRight} alt="Cleaning lady" />
         </div>
       </div>
     </section>
   );
 }
-
 function FeaturesBar() {
   const features = [
     {
