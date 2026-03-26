@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import search from "../assets/navbar-search.svg";
 import language from "../assets/navbar-language.svg";
 import arrow from "../assets/navbar-white-arrow.svg";
+import mobilelang from "../assets/mobilelang.svg";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -46,13 +47,18 @@ export default function Navbar() {
         </div>
 
         {/* Right side */}
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-0 md:gap-3 shrink-0">
           {/* Search icon — always visible */}
           <img src={search} />
 
           {/* Globe / language — hidden on mobile */}
-          <div className="hidden md:flex items-center gap-1 rounded-[10px] px-2 py-1">
-            <img src={language} />
+          {/* Language switch */}
+          <div className="flex items-center gap-1 rounded-[10px] px-2 py-1">
+            {/* Desktop */}
+            <img src={language} className="hidden lg:block" />
+
+            {/* Mobile */}
+            <img src={mobilelang} className="block lg:hidden" />
           </div>
 
           {/* Request a Quote — desktop only */}
@@ -60,7 +66,7 @@ export default function Navbar() {
             to="/quote"
             className="hidden lg:inline-flex gap-1 bg-[#da1b61] text-white font-['Poppins',sans-serif] text-sm px-4 py-2 rounded-[10px] hover:bg-[#c01850] transition-colors whitespace-nowrap cursor-pointer no-underline"
           >
-            <img src={arrow} className="w-5 h-5"/> {" "} Request a Quote
+            <img src={arrow} className="w-5 h-5" /> Request a Quote
           </Link>
 
           {/* Hamburger — mobile/tablet only (hidden on lg+) */}
