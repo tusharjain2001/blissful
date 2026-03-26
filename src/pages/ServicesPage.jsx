@@ -2,11 +2,14 @@ import SectionHeader from "../components/SectionHeader";
 import ServiceCard from "../components/ServiceCard";
 import CustomQuoteCard from "../components/CustomQuoteCard";
 import CTABanner from "../components/CTABanner";
+import electro from "../assets/electrostatic.svg";
 
 const serviceImages = {
-  standard: "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293695/blissful-cleaning/85aa9ed6-3528-44d3-bf93-1d6fa689cb06.png",
+  standard:
+    "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293695/blissful-cleaning/85aa9ed6-3528-44d3-bf93-1d6fa689cb06.png",
   deep: "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293698/blissful-cleaning/6cbc4d07-f436-4399-9ebb-4025e936e2d6.png",
-  moveInOut: "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293701/blissful-cleaning/f6de5ca0-5886-47ff-85c2-e4621edacc4c.png",
+  moveInOut:
+    "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293701/blissful-cleaning/f6de5ca0-5886-47ff-85c2-e4621edacc4c.png",
 };
 
 const cleaningServices = [
@@ -44,6 +47,12 @@ const additionalServices = [
     description:
       "Removing fine dust, debris, and residues after renovations or new builds. Making your new space livable.",
     image: serviceImages.deep,
+  },
+  {
+    title: "Electrostatic Cleaning",
+    description:
+      "Evenly coats surfaces using charged disinfectant, reaching hidden areas for quick, thorough sanitization across spaces.",
+    image: electro,
   },
 ];
 
@@ -97,18 +106,17 @@ export default function ServicesPage() {
             />
 
             {/* First row - service cards */}
-            <div className="flex flex-col md:flex-row flex-wrap justify-center gap-6 lg:gap-[52px] w-full">
+            <div className="grid grid-cols-1 md:grid-cols-3 justify-items-center gap-6 lg:gap-[52px] w-full">
               {cleaningServices.map((service) => (
                 <ServiceCard key={service.title} {...service} />
               ))}
             </div>
 
-            {/* Second row - 2 service cards + custom quote */}
-            <div className="flex flex-col md:flex-row flex-wrap justify-center items-stretch md:items-end gap-6 lg:gap-[52px] w-full">
+            {/* Second row - 3 service cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 justify-items-center gap-6 lg:gap-[52px] w-full">
               {additionalServices.map((service) => (
                 <ServiceCard key={service.title} {...service} />
               ))}
-              <CustomQuoteCard />
             </div>
           </div>
         </div>
@@ -125,7 +133,7 @@ export default function ServicesPage() {
             />
 
             {/* Plan cards */}
-            <div className="flex flex-col md:flex-row flex-wrap justify-center gap-6 lg:gap-[52px] w-full">
+            <div className="grid grid-cols-1 md:grid-cols-3 justify-items-center gap-6 lg:gap-[52px] w-full">
               {dailyPlans.map((plan) => (
                 <ServiceCard key={plan.title} {...plan} />
               ))}

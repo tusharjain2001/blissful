@@ -1,8 +1,14 @@
-export default function ServiceCard({ title, description, image, badge, badgeColor = "dark" }) {
+export default function ServiceCard({
+  title,
+  description,
+  image,
+  badge,
+  badgeColor = "dark",
+}) {
   return (
-    <div className="bg-white border border-[rgba(218,27,97,0.05)] rounded-[10px] overflow-hidden w-full md:w-[356px] flex flex-col shadow-sm hover:shadow-md transition-shadow">
-      {/* Text content */}
-      <div className="px-5 lg:px-7 pt-5 lg:pt-7 pb-2">
+    <div className="bg-white border border-[rgba(218,27,97,0.05)] rounded-[10px] overflow-hidden w-full md:w-[356px] h-full flex flex-col shadow-sm hover:shadow-md transition-shadow">
+      {/* Text content - flex-1 so it grows to fill space, pushing all images to align */}
+      <div className="flex-1 px-5 lg:px-7 pt-5 lg:pt-7 pb-2">
         <h3 className="font-['Poppins',sans-serif] font-medium text-[#0f172a] text-xl leading-[33px] mb-2">
           {title}
         </h3>
@@ -11,16 +17,14 @@ export default function ServiceCard({ title, description, image, badge, badgeCol
         </p>
       </div>
 
-      {/* Image area */}
-      <div className="relative flex-1 overflow-hidden">
+      {/* Image area - fixed height, no flex-1 */}
+      <div className="relative overflow-hidden mb-8">
         <img
           src={image}
           alt={title}
           className="w-full h-[200px] lg:h-[222px] object-cover"
         />
-        {badge && (
-          <Badge label={badge} color={badgeColor} />
-        )}
+        {badge && <Badge label={badge} color={badgeColor} />}
       </div>
     </div>
   );
