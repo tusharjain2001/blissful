@@ -3,6 +3,10 @@ import second from "../assets/about/secondsection.svg";
 import left from "../assets/about/hero-left.svg";
 import right from "../assets/about/hero-right.svg";
 import ellipse from "../assets/about/ellipse.svg";
+import teamElza from "../assets/team-elza.jpg";
+import teamMatthew from "../assets/team-matthew.jpg";
+import teamRhayane from "../assets/team-rhayane.jpg";
+import teamLauany from "../assets/team-lauany.jpg";
 
 // ─── Fresh asset URLs from Figma ───────────────────────────────────────────
 const imgs = {
@@ -20,14 +24,10 @@ const imgs = {
     "https://res.cloudinary.com/dgr33gxhd/raw/upload/v1774293606/blissful-cleaning/2d18b44f-853b-400f-b3b1-2e370e833f68",
   quoteClose:
     "https://res.cloudinary.com/dgr33gxhd/raw/upload/v1774293607/blissful-cleaning/3e87b74f-6a58-432f-a647-6aa657ae3ea5",
-  member1:
-    "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293609/blissful-cleaning/00f81d94-e5d1-416c-9214-cb9895d1e2cb.jpg",
-  member2:
-    "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293612/blissful-cleaning/70d6e66c-966e-46b8-9a28-df2f27288c78.png",
-  member3:
-    "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293615/blissful-cleaning/5defd2e1-199b-4e90-b795-bd2192780150.png",
-  member4:
-    "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293618/blissful-cleaning/68b8ab96-c865-4655-947b-61053b326ec1.png",
+  member1: teamElza,
+  member2: teamMatthew,
+  member3: teamRhayane,
+  member4: teamLauany,
 };
 
 const teamMembers = [

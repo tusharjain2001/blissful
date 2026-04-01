@@ -6,9 +6,9 @@ import reliable from "../assets/reliable.svg";
 import familyowned from "../assets/familyowned.svg";
 import highquality from "../assets/highquality.svg";
 import blackarrow from "../assets/blackarrow.svg";
-import deepcleaning from "../assets/deepcleaning.svg";
-import standardcleaning from "../assets/standardcleaning.svg";
-import thirdcleaning from "../assets/thirdcleaning.svg";
+import standardCleaningPhoto from "../assets/standard-cleaning-photo.jpg";
+import deepCleaningPhoto from "../assets/deep-cleaning-photo.jpg";
+import moveInOutPhoto from "../assets/moveinout-cleaning-photo.jpg";
 import difference from "../assets/difference.svg";
 import reviewss from "../assets/reviews.svg";
 import elena from "../assets/elena.svg";
@@ -305,18 +305,18 @@ function Services() {
     {
       title: "Standard Cleaning",
       desc: "Perfect for maintaining a tidy home on a regular basis. Includes dusting, vacuuming, mopping, and surface sanitization.",
-      image: standardcleaning,
+      image: standardCleaningPhoto,
       badge: "Popular",
     },
     {
       title: "Deep Cleaning",
       desc: "A thorough top-to-bottom scrub for a spotless living space. We reach the areas often missed during routine cleaning.",
-      image: deepcleaning,
+      image: deepCleaningPhoto,
     },
     {
       title: "Move In/Out Cleaning",
       desc: "Specialized cleaning for transitions. We ensure your new home is ready for you or your old home is ready for its next residents.",
-      image: thirdcleaning,
+      image: moveInOutPhoto,
     },
   ];
 
@@ -358,8 +358,8 @@ function Services() {
                   {s.desc}
                 </p>
               </div>
-              <div className=" bg-white flex-1">
-                <img src={s.image} alt={s.title} className="pb-6" />
+              <div className="overflow-hidden">
+                <img src={s.image} alt={s.title} className="w-full h-[226px] object-cover" />
               </div>
             </div>
           ))}
@@ -400,19 +400,19 @@ function Reviews() {
     {
       text: '"Blissful Cleaning transformed my apartment before I moved out. It looked better than when I first moved in! Highly recommend."',
       name: "Sarah Jenkins",
-      location: "Evanston, IL",
+      location: "Boston Ma",
       imagee: sarah,
     },
     {
       text: '"The recurring service is a lifesaver for our busy family. They are so careful around our pets and everything smells so fresh."',
       name: "Michael Ross",
-      location: "Evanston, IL",
+      location: "Westford Ma",
       imagee: michael,
     },
     {
       text: '"Professional, punctual, and very thorough. The deep cleaning service reached places I didn\'t even think to check."',
       name: "Elena Rodriguez",
-      location: "Oak Park, IL",
+      location: "Natck Ma",
       imagee: elena,
     },
   ];
@@ -506,7 +506,7 @@ function Disinfection() {
             </div>
             <div className="flex items-center gap-4">
               <div className="font-['Plus_Jakarta_Sans',sans-serif] font-extrabold text-[#da1b61] text-2xl lg:text-3xl">
-                +$199
+                +$99
               </div>
               <div className="bg-[rgba(218,27,97,0.1)] rounded-full w-14 h-8 flex items-end justify-end p-1">
                 <div className="bg-[#da1b61] rounded-full w-6 h-6 shadow-lg"></div>

@@ -3,7 +3,6 @@ import CTABanner from "../components/CTABanner";
 import bonded from "../assets/bonded.svg";
 import satisfaction from "../assets/satisfy.svg";
 import friendly from "../assets/friendly.svg";
-import addon from "../assets/addon.svg";
 import estimated from "../assets/estimated.svg";
 import area from "../assets/area.svg";
 import downarrow from "../assets/downarrow.svg";
@@ -19,7 +18,6 @@ const imgs = {
 const pricingImages = {
   estimatedPricing: estimated,
   comparisonTable: area,
-  addOnPricing: addon,
 };
 
 const trustBadges = [
@@ -114,37 +112,6 @@ function SelectInput({ name, value, onChange, children }) {
   );
 }
 
-// ─── Custom Rounded Checkbox ───────────────────────────────────────────────
-function RoundedCheckbox({ name, checked, onChange }) {
-  return (
-    <label
-      className="relative shrink-0 cursor-pointer"
-      style={{ width: 20, height: 20 }}
-    >
-      <input
-        type="checkbox"
-        name={name}
-        checked={checked}
-        onChange={onChange}
-        className="sr-only peer"
-      />
-      <div className="w-5 h-5 border-2 border-[#cbd5e1] rounded-[6px] bg-white peer-checked:bg-[#da1b61] peer-checked:border-[#da1b61] transition-all flex items-center justify-center">
-        {checked && (
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-            <path
-              d="M2.5 6L5 8.5L9.5 3.5"
-              stroke="white"
-              strokeWidth="1.8"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        )}
-      </div>
-    </label>
-  );
-}
-
 // ─── Progress Bar ──────────────────────────────────────────────────────────
 function ProgressBar() {
   return (
@@ -170,6 +137,28 @@ function ProgressBar() {
   );
 }
 
+// ─── Rounded Checkbox ─────────────────────────────────────────────────────
+function RoundedCheckbox({ name, checked, onChange }) {
+  return (
+    <div
+      onClick={() => onChange({ target: { name, type: "checkbox", checked: !checked } })}
+      className="shrink-0 rounded-full border-2 flex items-center justify-center cursor-pointer transition-colors"
+      style={{
+        width: 20,
+        height: 20,
+        borderColor: checked ? "#da1b61" : "#cbd5e1",
+        backgroundColor: checked ? "#da1b61" : "white",
+      }}
+    >
+      {checked && (
+        <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+          <path d="M1 4L3.5 6.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      )}
+    </div>
+  );
+}
+
 // ─── Left: Quote Form ──────────────────────────────────────────────────────
 function QuoteFormLeft() {
   const [form, setForm] = useState({
@@ -184,8 +173,8 @@ function QuoteFormLeft() {
     propertySize: "",
     date: "",
     time: "",
-    addFogging: false,
     notes: "",
+    addFogging: false,
   });
 
   const handleChange = (e) => {
@@ -359,6 +348,7 @@ function QuoteFormLeft() {
 
       {/* ── Add-ons + Notes ── */}
       <div className="flex flex-col gap-6">
+        {/* Sanitizing Fogging add-on */}
         <label
           className="flex items-center justify-between rounded-[12px] cursor-pointer gap-3"
           style={{
@@ -392,7 +382,7 @@ function QuoteFormLeft() {
             className="font-['Plus_Jakarta_Sans',sans-serif] font-bold text-[#da1b61] shrink-0"
             style={{ fontSize: 16, lineHeight: "24px" }}
           >
-            +$199
+            +$99
           </span>
         </label>
 
@@ -482,22 +472,70 @@ function PricingPanel() {
       <img
         src={pricingImages.estimatedPricing}
         alt="Estimated Commercial Pricing per sq ft"
-        className="w-full "
+        className="w-full"
       />
 
       {/* ── Image 2: Comparison Table ── */}
       <img
         src={pricingImages.comparisonTable}
         alt="Area Task comparison - Standard vs Deep Detail"
-        className="w-full "
+        className="w-full"
       />
 
-      {/* ── Image 3: Add-on Pricing ── */}
-      <img
-        src={pricingImages.addOnPricing}
-        alt="Add-on services and pricing"
-        className="w-full "
-      />
+      {/* ── Add-on Pricing card ── */}
+      <div className="bg-white rounded-[10px]" style={{ border: "1px solid #e2e8f0" }}>
+        <div
+          style={{
+            padding: "16px 24px",
+            display: "flex",
+            justifyContent: "space-between",
+            borderBottom: "1px solid #f1f5f9",
+          }}
+        >
+          <span
+            className="font-['Poppins',sans-serif] text-black font-medium"
+            style={{ fontSize: 18 }}
+          >
+            Add on
+          </span>
+          <span
+            className="font-['Poppins',sans-serif] text-black"
+            style={{ fontSize: 18 }}
+          >
+            Pricing
+          </span>
+        </div>
+        <div style={{ padding: "0 24px" }}>
+          {[
+            "Interior Window Cleaning",
+            "Post-Construction Cleanup",
+            "Supply Restocking",
+            "Pressure Washing",
+          ].map((item, i, arr) => (
+            <div
+              key={item}
+              className="flex items-center justify-between"
+              style={{
+                padding: "18px 0",
+                borderBottom: i < arr.length - 1 ? "1px solid #f1f5f9" : "none",
+              }}
+            >
+              <span
+                className="font-['Poppins',sans-serif] text-[#787878]"
+                style={{ fontSize: 14 }}
+              >
+                {item}
+              </span>
+              <span
+                className="font-['Poppins',sans-serif] text-[#787878]"
+                style={{ fontSize: 14 }}
+              >
+                By quote
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
