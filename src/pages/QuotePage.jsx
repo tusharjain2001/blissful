@@ -5,6 +5,8 @@ import satisfaction from "../assets/satisfy.svg";
 import friendly from "../assets/friendly.svg";
 import estimated from "../assets/estimated.svg";
 import area from "../assets/area.svg";
+import commercialIcon from "../assets/commercial.svg";
+import residentialIcon from "../assets/residential.svg";
 import downarrow from "../assets/downarrow.svg";
 
 // ─── Assets ────────────────────────────────────────────────────────────────
@@ -18,6 +20,11 @@ const imgs = {
 const pricingImages = {
   estimatedPricing: estimated,
   comparisonTable: area,
+};
+
+const pricingTypeImages = {
+  commercial: commercialIcon,
+  residential: residentialIcon,
 };
 
 const trustBadges = [
@@ -424,54 +431,36 @@ function QuoteFormLeft() {
 }
 
 // ─── Right: Pricing Panel ─────────────────────────────────────────────────
-function PricingPanel() {
+function PricingPanel({ selectedType, onTypeChange }) {
   return (
     <div className="flex flex-col gap-6">
-      {/* ── Legend Chips (static, non-interactive) ── */}
-      <div className="flex items-center gap-4">
-        <div
-          className="flex items-center gap-3 border border-[#E2E8F0] bg-white rounded-[12px]"
-          style={{
-            padding: "14px 24px",
-            boxShadow: "0px 1px 3px rgba(0,0,0,0.04)",
-          }}
-        >
-          <span
-            className="shrink-0 rounded-full"
-            style={{ width: 14, height: 14, backgroundColor: "#b6c334" }}
-          />
-          <span
-            className="font-['Plus_Jakarta_Sans',sans-serif] font-medium text-[#B6C334] whitespace-nowrap"
-            style={{ fontSize: 15, lineHeight: "22px" }}
-          >
-            Standard Office/Retail
-          </span>
-        </div>
-
-        <div
-          className="flex items-center gap-3 border border-[#E2E8F0] bg-white rounded-[12px]"
-          style={{
-            padding: "14px 24px",
-            boxShadow: "0px 1px 3px rgba(0,0,0,0.04)",
-          }}
-        >
-          <span
-            className="shrink-0 rounded-full"
-            style={{ width: 14, height: 14, backgroundColor: "#da1b61" }}
-          />
-          <span
-            className="font-['Plus_Jakarta_Sans',sans-serif] font-medium text-[#da1b61] whitespace-nowrap"
-            style={{ fontSize: 15, lineHeight: "22px" }}
-          >
-            Deep/Detail Cleaning
-          </span>
-        </div>
+      <div className="flex items-center gap-3">
+        {[
+          { key: "commercial", label: "Commercial" },
+          { key: "residential", label: "Residential" },
+        ].map((tab) => {
+          const active = selectedType === tab.key;
+          return (
+            <button
+              key={tab.key}
+              type="button"
+              onClick={() => onTypeChange(tab.key)}
+              className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
+                active
+                  ? "bg-[#da1b61] text-white border border-[#da1b61]"
+                  : "bg-white text-[#334155] border border-[#E2E8F0]"
+              }`}
+            >
+              {tab.label}
+            </button>
+          );
+        })}
       </div>
 
-      {/* ── Image 1: Estimated Commercial Pricing card ── */}
+      {/* ── Image 1: Estimated Pricing card based on selection ── */}
       <img
-        src={pricingImages.estimatedPricing}
-        alt="Estimated Commercial Pricing per sq ft"
+        src={pricingTypeImages[selectedType]}
+        alt={`${selectedType === "commercial" ? "Commercial" : "Residential"} pricing`}
         className="w-full"
       />
 
@@ -582,6 +571,8 @@ function TrustBadges() {
 
 // ─── Page ──────────────────────────────────────────────────────────────────
 export default function QuotePage() {
+  const [pricingType, setPricingType] = useState("commercial");
+
   return (
     <>
       <QuoteHero />
@@ -596,7 +587,7 @@ export default function QuotePage() {
 
           {/* ── Right column: Pricing panel (sticky on scroll) ── */}
           <div className="w-full lg:w-[45%] xl:w-[50%] lg:sticky lg:top-8 lg:self-start">
-            <PricingPanel />
+            <PricingPanel selectedType={pricingType} onTypeChange={setPricingType} />
           </div>
         </div>
       </div>
