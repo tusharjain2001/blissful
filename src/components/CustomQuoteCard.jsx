@@ -1,27 +1,25 @@
-const sparkIcon = "https://res.cloudinary.com/dgr33gxhd/raw/upload/v1774293579/blissful-cleaning/efe80d3a-ce51-4401-b112-5b27f81cdee6";
-
+import sparkIcon from "../assets/customquotenew.svg";
 export default function CustomQuoteCard() {
   return (
-    <div className="bg-[rgba(248,248,248,0.28)] border-2 border-dashed border-[rgba(218,27,97,0.2)] rounded-[10px] w-full md:w-[354px] h-auto md:h-[471px] flex flex-col items-center justify-center px-8 py-12 md:py-24">
-      {/* Icon */}
-      <div className="bg-[#b6c334] rounded-full w-16 h-16 flex items-center justify-center mb-4">
-        <img src={sparkIcon} alt="" className="w-7 h-6" />
+    <div className="w-full rounded-[14px] border border-dashed border-[rgba(255,119,167,0.45)] bg-[rgba(255,255,255,0.26)] px-6 py-8 sm:px-10 sm:py-10 lg:px-12 lg:py-12">
+      <div className="mx-auto flex max-w-[520px] flex-col items-center text-center">
+        <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#b6c334]">
+          <img src={sparkIcon} alt="" className="h-6 w-6" />
+        </div>
+
+        <h3 className="mb-2 font-['Poppins',sans-serif] text-xl font-medium text-[#0f172a]">
+          Need something else?
+        </h3>
+
+        <p className="mb-6 font-['Inter',sans-serif] text-sm leading-6 text-[#64748b] sm:text-[15px]">
+          We offer custom cleaning solutions tailored to your unique
+          requirements.
+        </p>
+
+        <button className="rounded-[10px] bg-[#da1b61] px-6 py-2.5 font-['Poppins',sans-serif] text-sm font-medium text-white transition-colors hover:bg-[#c01850]">
+          Get Custom Quote
+        </button>
       </div>
-
-      {/* Title */}
-      <h3 className="font-['Poppins',sans-serif] font-medium text-[#0f172a] text-xl text-center mb-2">
-        Need something else?
-      </h3>
-
-      {/* Description */}
-      <p className="font-['Inter',sans-serif] text-[#475569] text-base text-center leading-5 mb-6 max-w-[262px]">
-        We offer custom cleaning solutions tailored to your unique requirements.
-      </p>
-
-      {/* Button */}
-      <button className="bg-[#da1b61] text-white font-['Poppins',sans-serif] font-medium text-sm px-6 py-2 rounded-[10px] hover:bg-[#c01850] transition-colors cursor-pointer">
-        Get Custom Quote
-      </button>
     </div>
   );
 }

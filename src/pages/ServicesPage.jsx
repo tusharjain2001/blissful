@@ -3,21 +3,23 @@ import ServiceCard from "../components/ServiceCard";
 import CustomQuoteCard from "../components/CustomQuoteCard";
 import CTABanner from "../components/CTABanner";
 import electro from "../assets/electrostatic.svg";
+import standardcleaning from "../assets/standardcleaning.svg";
+import deepcleaning from "../assets/deepcleaning.svg";
+import movecleaning from "../assets/movecleaning.svg";
+import recurringcleaning from "../assets/recurringcleaning.svg";
+import constructioncleaning from "../assets/constructioncleaning.svg";
+import weeklycleaning from "../assets/weeklycleaning.png";
+import biweeklycleaning from "../assets/biweeklycleaning.png";
+import monthlycleaning from "../assets/monthlycleaning.png";
 
-const serviceImages = {
-  standard:
-    "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293695/blissful-cleaning/85aa9ed6-3528-44d3-bf93-1d6fa689cb06.png",
-  deep: "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293698/blissful-cleaning/6cbc4d07-f436-4399-9ebb-4025e936e2d6.png",
-  moveInOut:
-    "https://res.cloudinary.com/dgr33gxhd/image/upload/v1774293701/blissful-cleaning/f6de5ca0-5886-47ff-85c2-e4621edacc4c.png",
-};
+
 
 const cleaningServices = [
   {
     title: "Standard Cleaning",
     description:
       "Perfect for maintaining a tidy home on a regular basis. Includes dusting, vacuuming, mopping, and surface sanitization.",
-    image: serviceImages.standard,
+    image: standardcleaning,
     badge: "Popular",
     badgeColor: "dark",
   },
@@ -25,13 +27,13 @@ const cleaningServices = [
     title: "Deep Cleaning",
     description:
       "A thorough top-to-bottom scrub for a spotless living space. We reach the areas often missed during routine cleaning.",
-    image: serviceImages.deep,
+    image: deepcleaning,
   },
   {
     title: "Move In/Out Cleaning",
     description:
       "Specialized cleaning for transitions. We ensure your new home is ready for you or your old home is ready for its next residents.",
-    image: serviceImages.moveInOut,
+    image: movecleaning,
   },
 ];
 
@@ -40,13 +42,13 @@ const additionalServices = [
     title: "Recurring Cleaning",
     description:
       "Scheduled weekly, bi-weekly, or monthly cleanings to keep your home consistently fresh without the hassle.",
-    image: serviceImages.standard,
+    image: recurringcleaning,
   },
   {
     title: "Post-Construction",
     description:
       "Removing fine dust, debris, and residues after renovations or new builds. Making your new space livable.",
-    image: serviceImages.deep,
+    image: constructioncleaning,
   },
   {
     title: "Electrostatic Cleaning",
@@ -61,7 +63,7 @@ const dailyPlans = [
     title: "Monthly Cleaning",
     description:
       "Perfect for maintaining a tidy home on a regular basis. Includes dusting, vacuuming, mopping, and surface sanitization.",
-    image: serviceImages.standard,
+    image: monthlycleaning,
     badge: "Monthly",
     badgeColor: "pink",
   },
@@ -69,7 +71,7 @@ const dailyPlans = [
     title: "Weekly Cleaning",
     description:
       "A thorough top-to-bottom scrub for a spotless living space. We reach the areas often missed during routine cleaning.",
-    image: serviceImages.deep,
+    image: weeklycleaning,
     badge: "Weekly",
     badgeColor: "pink",
   },
@@ -77,7 +79,7 @@ const dailyPlans = [
     title: "Bi-Weekly Cleaning",
     description:
       "Specialized cleaning for transitions. We ensure your new home is ready for you or your old home is ready for its next residents.",
-    image: serviceImages.moveInOut,
+    image: biweeklycleaning,
     badge: "BI Weekly",
     badgeColor: "pink",
   },
@@ -119,6 +121,13 @@ export default function ServicesPage() {
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Custom Quote Section */}
+      <section className="pt-4 pb-8 lg:pt-6 lg:pb-12">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-[72px]">
+          <CustomQuoteCard />
         </div>
       </section>
 
