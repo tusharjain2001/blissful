@@ -64,8 +64,6 @@ const dailyPlans = [
     description:
       "Perfect for maintaining a tidy home on a regular basis. Includes dusting, vacuuming, mopping, and surface sanitization.",
     image: monthlycleaning,
-    badge: "Monthly",
-    badgeColor: "pink",
   },
   {
     title: "Weekly Cleaning",
@@ -80,8 +78,6 @@ const dailyPlans = [
     description:
       "Specialized cleaning for transitions. We ensure your new home is ready for you or your old home is ready for its next residents.",
     image: biweeklycleaning,
-    badge: "BI Weekly",
-    badgeColor: "pink",
   },
 ];
 

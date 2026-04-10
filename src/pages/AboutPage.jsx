@@ -3,10 +3,10 @@ import second from "../assets/about/secondsection.svg";
 import left from "../assets/about/hero-left.svg";
 import right from "../assets/about/hero-right.svg";
 import ellipse from "../assets/about/ellipse.svg";
-import teamElza from "../assets/team-elza.jpg";
-import teamMatthew from "../assets/team-matthew.jpg";
-import teamRhayane from "../assets/team-rhayane.jpg";
-import teamLauany from "../assets/team-lauany.jpg";
+import teamElza from "../assets/elza.svg";
+import teamMatthew from "../assets/mathew.svg";
+import teamRhayane from "../assets/rhayane.svg";
+import teamLauany from "../assets/lauancy.svg";
 
 // ─── Fresh asset URLs from Figma ───────────────────────────────────────────
 const imgs = {

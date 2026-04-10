@@ -12,9 +12,9 @@ import calendarImage from "../assets/contact-calendar.png";
 import bulletIcon from "../assets/contact-bullet.svg";
 
 const contactCards = [
-  { icon: phoneIcon,   label: "Phone",   value: "(555) 123-4567" },
-  { icon: emailIcon,   label: "Email",   value: "hello@blissfulcleaning.com" },
-  { icon: addressIcon, label: "Address", value: "123 Main St, Chicago, IL" },
+  { icon: phoneIcon,   label: "Phone",   value: "774-388-6228" },
+  { icon: emailIcon,   label: "Email",   value: "blissfulcleaningma@gmail.com" },
+  { icon: addressIcon, label: "Address", value: "Natick, Massachusetts 01760" },
 ];
 
 const serviceAreas = [
