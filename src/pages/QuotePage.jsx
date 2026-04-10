@@ -3,13 +3,11 @@ import CTABanner from "../components/CTABanner";
 import bonded from "../assets/bonded.svg";
 import satisfaction from "../assets/satisfy.svg";
 import friendly from "../assets/friendly.svg";
-import estimated from "../assets/estimated.svg";
 import area from "../assets/area.svg";
 import commercialIcon from "../assets/commercial.svg";
 import residentialIcon from "../assets/residential.svg";
 import downarrow from "../assets/downarrow.svg";
 
-// ─── Assets ────────────────────────────────────────────────────────────────
 const imgs = {
   bondedIcon: bonded,
   ecoIcon: friendly,
@@ -18,7 +16,6 @@ const imgs = {
 };
 
 const pricingImages = {
-  estimatedPricing: estimated,
   comparisonTable: area,
 };
 
@@ -45,7 +42,93 @@ const trustBadges = [
   },
 ];
 
-// ─── Hero ──────────────────────────────────────────────────────────────────
+const initialForm = {
+  name: "",
+  phone: "",
+  email: "",
+  address: "",
+  state: "",
+  city: "",
+  zip: "",
+  serviceType: "",
+  propertySize: "",
+  date: "",
+  time: "",
+  notes: "",
+  addFogging: false,
+};
+
+const propertySizeOptions = [
+  { value: "1bhk", label: "1 BHK" },
+  { value: "2bhk", label: "2 BHK" },
+  { value: "3bhk", label: "3 BHK" },
+  { value: "4bhk", label: "4+ BHK" },
+  { value: "villa", label: "Villa / Independent House" },
+];
+
+const serviceTypeOptions = [
+  { value: "standard", label: "Standard Cleaning" },
+  { value: "deep", label: "Deep Cleaning" },
+  { value: "movein", label: "Move In/ Out Cleaning" },
+  { value: "recurring", label: "Recurring Cleaning" },
+  { value: "postconstruction", label: "Post-Construction" },
+  { value: "electrostatic", label: "Electrostatic Cleaning" },
+];
+
+const timeOptions = [
+  { value: "morning", label: "Morning (8am - 12pm)" },
+  { value: "afternoon", label: "Afternoon (12 PM - 4 PM)" },
+  { value: "evening", label: "Evening (4 PM - 8 PM)" },
+  { value: "night", label: "Night (8 PM - 10 PM)" },
+];
+
+const propertyPricing = {
+  "1bhk": 180,
+  "2bhk": 240,
+  "3bhk": 320,
+  "4bhk": 420,
+  villa: 550,
+};
+
+const serviceMultipliers = {
+  standard: 1,
+  deep: 1.35,
+  movein: 1.5,
+  recurring: 0.9,
+  postconstruction: 1.7,
+  electrostatic: 1.2,
+};
+
+function getOptionLabel(options, value, fallback = "") {
+  return options.find((option) => option.value === value)?.label || fallback;
+}
+
+function formatDate(date) {
+  if (!date) return "dd / mm / yy";
+
+  const parsed = new Date(date);
+  if (Number.isNaN(parsed.getTime())) return date;
+
+  return parsed.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+  });
+}
+
+function calculateQuote(form) {
+  const propertyBase = propertyPricing[form.propertySize] || 0;
+  const multiplier = serviceMultipliers[form.serviceType] || 1;
+  const serviceAmount = Math.round(propertyBase * multiplier);
+  const addOnAmount = form.addFogging ? 99 : 0;
+
+  return {
+    serviceAmount,
+    addOnAmount,
+    totalAmount: serviceAmount + addOnAmount,
+  };
+}
+
 function QuoteHero() {
   return (
     <section
@@ -68,7 +151,6 @@ function QuoteHero() {
   );
 }
 
-// ─── Form field helpers ────────────────────────────────────────────────────
 function FormField({ label, children, className = "" }) {
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
@@ -83,7 +165,7 @@ function FormField({ label, children, className = "" }) {
   );
 }
 
-function TextInput({ name, value, onChange, placeholder, type = "text" }) {
+function TextInput({ name, value, onChange, placeholder, type = "text", disabled = false }) {
   return (
     <input
       type={type}
@@ -91,7 +173,8 @@ function TextInput({ name, value, onChange, placeholder, type = "text" }) {
       value={value}
       onChange={onChange}
       placeholder={placeholder}
-      className="w-full bg-white rounded-[12px] border border-[#e2e8f0] font-['Inter',sans-serif] text-[#6b7280] outline-none"
+      disabled={disabled}
+      className="w-full bg-white rounded-[12px] border border-[#e2e8f0] font-['Inter',sans-serif] text-[#6b7280] outline-none disabled:bg-white"
       style={{ fontSize: 16, padding: "13.5px 17px", height: 55 }}
     />
   );
@@ -119,8 +202,9 @@ function SelectInput({ name, value, onChange, children }) {
   );
 }
 
-// ─── Progress Bar ──────────────────────────────────────────────────────────
-function ProgressBar() {
+function ProgressBar({ step = 1 }) {
+  const isPaymentStep = step === 2;
+
   return (
     <div className="flex flex-col gap-2 mb-8 lg:mb-10">
       <div className="flex items-end justify-between">
@@ -128,23 +212,26 @@ function ProgressBar() {
           className="font-['Plus_Jakarta_Sans',sans-serif] font-bold text-[#b6c334] uppercase tracking-[0.35px]"
           style={{ fontSize: 14, lineHeight: "20px" }}
         >
-          Step 1 of 2: Details
+          {isPaymentStep ? "Step 2 of 2: Payment" : "Step 1 of 2: Details"}
         </span>
         <span
           className="font-['Plus_Jakarta_Sans',sans-serif] font-medium text-[#94a3b8]"
           style={{ fontSize: 12, lineHeight: "16px" }}
         >
-          50% Complete
+          {isPaymentStep ? "100% Complete" : "50% Complete"}
         </span>
       </div>
       <div className="bg-white h-2 rounded-full overflow-hidden">
-        <div className="bg-[#b6c334] h-full w-1/2 rounded-full" />
+        <div
+          className={`bg-[#b6c334] h-full rounded-full transition-all duration-300 ${
+            isPaymentStep ? "w-full" : "w-1/2"
+          }`}
+        />
       </div>
     </div>
   );
 }
 
-// ─── Rounded Checkbox ─────────────────────────────────────────────────────
 function RoundedCheckbox({ name, checked, onChange }) {
   return (
     <div
@@ -166,39 +253,9 @@ function RoundedCheckbox({ name, checked, onChange }) {
   );
 }
 
-// ─── Left: Quote Form ──────────────────────────────────────────────────────
-function QuoteFormLeft() {
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    address: "",
-    state: "",
-    city: "",
-    zip: "",
-    serviceType: "",
-    propertySize: "",
-    date: "",
-    time: "",
-    notes: "",
-    addFogging: false,
-  });
-
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: type === "checkbox" ? checked : value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
+function QuoteFormLeft({ form, onChange, onSubmit }) {
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-8 lg:gap-10">
-      {/* ── Contact Details ── */}
+    <form onSubmit={onSubmit} className="flex flex-col gap-8 lg:gap-10">
       <div className="flex flex-col gap-5">
         <h2
           className="font-['Poppins',sans-serif] font-medium text-[#032b3a] m-0"
@@ -210,18 +267,13 @@ function QuoteFormLeft() {
         <div className="flex flex-col gap-5 lg:gap-6">
           <div className="flex flex-col md:flex-row gap-5 md:gap-8">
             <FormField label="Full Name" className="flex-1">
-              <TextInput
-                name="name"
-                value={form.name}
-                onChange={handleChange}
-                placeholder="Jane Doe"
-              />
+              <TextInput name="name" value={form.name} onChange={onChange} placeholder="Jane Doe" />
             </FormField>
             <FormField label="Phone Number" className="flex-1">
               <TextInput
                 name="phone"
                 value={form.phone}
-                onChange={handleChange}
+                onChange={onChange}
                 placeholder="(555) 000-0000"
                 type="tel"
               />
@@ -232,7 +284,7 @@ function QuoteFormLeft() {
             <TextInput
               name="email"
               value={form.email}
-              onChange={handleChange}
+              onChange={onChange}
               placeholder="jane@example.com"
               type="email"
             />
@@ -240,19 +292,10 @@ function QuoteFormLeft() {
 
           <div className="flex flex-col md:flex-row gap-5 md:gap-8">
             <FormField label="Your Address" className="flex-1">
-              <TextInput
-                name="address"
-                value={form.address}
-                onChange={handleChange}
-                placeholder="123 Main St"
-              />
+              <TextInput name="address" value={form.address} onChange={onChange} placeholder="123 Main St" />
             </FormField>
             <FormField label="State" className="flex-1">
-              <SelectInput
-                name="state"
-                value={form.state}
-                onChange={handleChange}
-              >
+              <SelectInput name="state" value={form.state} onChange={onChange}>
                 <option value="">Select</option>
                 <option value="IL">Illinois</option>
                 <option value="MA">Massachusetts</option>
@@ -264,26 +307,15 @@ function QuoteFormLeft() {
 
           <div className="flex flex-col md:flex-row gap-5 md:gap-8">
             <FormField label="City" className="flex-1">
-              <TextInput
-                name="city"
-                value={form.city}
-                onChange={handleChange}
-                placeholder="Chicago"
-              />
+              <TextInput name="city" value={form.city} onChange={onChange} placeholder="Chicago" />
             </FormField>
             <FormField label="Zip Code" className="flex-1">
-              <TextInput
-                name="zip"
-                value={form.zip}
-                onChange={handleChange}
-                placeholder="60601"
-              />
+              <TextInput name="zip" value={form.zip} onChange={onChange} placeholder="60601" />
             </FormField>
           </div>
         </div>
       </div>
 
-      {/* ── Service Details ── */}
       <div className="flex flex-col gap-5">
         <h2
           className="font-['Poppins',sans-serif] font-medium text-[#032b3a] m-0"
@@ -295,32 +327,23 @@ function QuoteFormLeft() {
         <div className="flex flex-col gap-5 lg:gap-6">
           <div className="flex flex-col md:flex-row gap-5 md:gap-8">
             <FormField label="Property Size" className="flex-1">
-              <SelectInput
-                name="propertySize"
-                value={form.propertySize}
-                onChange={handleChange}
-              >
+              <SelectInput name="propertySize" value={form.propertySize} onChange={onChange}>
                 <option value="">Select</option>
-                <option value="1bhk">1 BHK</option>
-                <option value="2bhk">2 BHK</option>
-                <option value="3bhk">3 BHK</option>
-                <option value="4bhk">4+ BHK</option>
-                <option value="villa">Villa / Independent House</option>
+                {propertySizeOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
               </SelectInput>
             </FormField>
             <FormField label="Service Type" className="flex-1">
-              <SelectInput
-                name="serviceType"
-                value={form.serviceType}
-                onChange={handleChange}
-              >
+              <SelectInput name="serviceType" value={form.serviceType} onChange={onChange}>
                 <option value="">Select</option>
-                <option value="standard">Standard Cleaning</option>
-                <option value="deep">Deep Cleaning</option>
-                <option value="movein">Move In/ Out Cleaning</option>
-                <option value="recurring">Recurring Cleaning</option>
-                <option value="postconstruction">Post-Construction</option>
-                <option value="electrostatic">Electrostatic Cleaning</option>
+                {serviceTypeOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
               </SelectInput>
             </FormField>
           </div>
@@ -331,31 +354,26 @@ function QuoteFormLeft() {
                 type="date"
                 name="date"
                 value={form.date}
-                onChange={handleChange}
+                onChange={onChange}
                 className="w-full bg-white rounded-[12px] border border-[#e2e8f0] font-['Plus_Jakarta_Sans',sans-serif] text-[#7c7c7c] outline-none cursor-pointer"
                 style={{ fontSize: 16, padding: "13.5px 17px", height: 55 }}
               />
             </FormField>
             <FormField label="Preferred Timings" className="flex-1">
-              <SelectInput
-                name="time"
-                value={form.time}
-                onChange={handleChange}
-              >
+              <SelectInput name="time" value={form.time} onChange={onChange}>
                 <option value="">Select</option>
-                <option value="morning">Morning (8am - 12pm)</option>
-                <option value="afternoon">Afternoon (12 PM – 4 PM)</option>
-                <option value="evening">Evening (4 PM – 8 PM)</option>
-                <option value="night">Night (8 PM – 10 PM)</option>
+                {timeOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
               </SelectInput>
             </FormField>
           </div>
         </div>
       </div>
 
-      {/* ── Add-ons + Notes ── */}
       <div className="flex flex-col gap-6">
-        {/* Sanitizing Fogging add-on */}
         <label
           className="flex items-center justify-between rounded-[12px] cursor-pointer gap-3"
           style={{
@@ -365,11 +383,7 @@ function QuoteFormLeft() {
           }}
         >
           <div className="flex items-center gap-3 flex-1">
-            <RoundedCheckbox
-              name="addFogging"
-              checked={form.addFogging}
-              onChange={handleChange}
-            />
+            <RoundedCheckbox name="addFogging" checked={form.addFogging} onChange={onChange} />
             <div>
               <div
                 className="font-['Plus_Jakarta_Sans',sans-serif] text-[#1E293B]"
@@ -403,7 +417,7 @@ function QuoteFormLeft() {
           <textarea
             name="notes"
             value={form.notes}
-            onChange={handleChange}
+            onChange={onChange}
             placeholder="Tell us about pets, key access, or specific focus areas..."
             rows={4}
             className="w-full bg-white rounded-[12px] border border-[#e2e8f0] font-['Plus_Jakarta_Sans',sans-serif] text-[#6b7280] outline-none resize-none"
@@ -412,7 +426,6 @@ function QuoteFormLeft() {
         </div>
       </div>
 
-      {/* ── Submit ── */}
       <button
         type="submit"
         className="w-full bg-[#da1b61] text-white rounded-[10px] font-['Poppins',sans-serif] font-medium hover:bg-[#c01850] transition-colors cursor-pointer"
@@ -430,7 +443,59 @@ function QuoteFormLeft() {
   );
 }
 
-// ─── Right: Pricing Panel ─────────────────────────────────────────────────
+function SummaryField({ label, value }) {
+  return (
+    <div className="flex flex-col gap-2">
+      <label
+        className="font-['Poppins',sans-serif] text-[#334155]"
+        style={{ fontSize: 18, lineHeight: "20px" }}
+      >
+        {label}
+      </label>
+      <TextInput value={value} disabled />
+    </div>
+  );
+}
+
+function BookingSummaryLeft({ form, onBack }) {
+  const serviceType = getOptionLabel(serviceTypeOptions, form.serviceType, "Standard Cleaning");
+  const propertySize = getOptionLabel(propertySizeOptions, form.propertySize, "Studio / 1 Bedroom");
+  const preferredTime = getOptionLabel(timeOptions, form.time, "Morning (8am - 12pm)");
+  const fullAddress = [form.address, form.city, form.state, form.zip].filter(Boolean).join(", ");
+
+  return (
+    <div className="flex flex-col gap-7">
+      <button
+        type="button"
+        onClick={onBack}
+        className="w-fit flex items-center gap-2 bg-transparent border-0 p-0 cursor-pointer"
+      >
+        <span className="w-6 h-6 rounded-full border border-[#cbd5e1] flex items-center justify-center text-[#475569]">
+          &#8249;
+        </span>
+        <span
+          className="font-['Poppins',sans-serif] font-medium text-[#032b3a]"
+          style={{ fontSize: 20, lineHeight: "21.44px" }}
+        >
+          Booking Summary
+        </span>
+      </button>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8">
+        <SummaryField label="Service" value={form.name || "Jane Doe"} />
+        <SummaryField label="Date & Time" value={form.phone || "(555) 000-0000"} />
+        <div className="md:col-span-2">
+          <SummaryField label="Address" value={form.email || fullAddress || "jane@example.com"} />
+        </div>
+        <SummaryField label="Service Type" value={serviceType} />
+        <SummaryField label="Property Size" value={propertySize} />
+        <SummaryField label="Preferred Date" value={formatDate(form.date)} />
+        <SummaryField label="Preferred Time" value={preferredTime} />
+      </div>
+    </div>
+  );
+}
+
 function PricingPanel({ selectedType, onTypeChange }) {
   return (
     <div className="flex flex-col gap-6">
@@ -440,6 +505,7 @@ function PricingPanel({ selectedType, onTypeChange }) {
           { key: "residential", label: "Residential" },
         ].map((tab) => {
           const active = selectedType === tab.key;
+
           return (
             <button
               key={tab.key}
@@ -457,21 +523,18 @@ function PricingPanel({ selectedType, onTypeChange }) {
         })}
       </div>
 
-      {/* ── Image 1: Estimated Pricing card based on selection ── */}
       <img
         src={pricingTypeImages[selectedType]}
         alt={`${selectedType === "commercial" ? "Commercial" : "Residential"} pricing`}
         className="w-full"
       />
 
-      {/* ── Image 2: Comparison Table ── */}
       <img
         src={pricingImages.comparisonTable}
         alt="Area Task comparison - Standard vs Deep Detail"
         className="w-full"
       />
 
-      {/* ── Add-on Pricing card ── */}
       <div className="bg-white rounded-[10px]" style={{ border: "1px solid #e2e8f0" }}>
         <div
           style={{
@@ -481,16 +544,10 @@ function PricingPanel({ selectedType, onTypeChange }) {
             borderBottom: "1px solid #f1f5f9",
           }}
         >
-          <span
-            className="font-['Poppins',sans-serif] text-black font-medium"
-            style={{ fontSize: 18 }}
-          >
+          <span className="font-['Poppins',sans-serif] text-black font-medium" style={{ fontSize: 18 }}>
             Add on
           </span>
-          <span
-            className="font-['Poppins',sans-serif] text-black"
-            style={{ fontSize: 18 }}
-          >
+          <span className="font-['Poppins',sans-serif] text-black" style={{ fontSize: 18 }}>
             Pricing
           </span>
         </div>
@@ -509,16 +566,10 @@ function PricingPanel({ selectedType, onTypeChange }) {
                 borderBottom: i < arr.length - 1 ? "1px solid #f1f5f9" : "none",
               }}
             >
-              <span
-                className="font-['Poppins',sans-serif] text-[#787878]"
-                style={{ fontSize: 14 }}
-              >
+              <span className="font-['Poppins',sans-serif] text-[#787878]" style={{ fontSize: 14 }}>
                 {item}
               </span>
-              <span
-                className="font-['Poppins',sans-serif] text-[#787878]"
-                style={{ fontSize: 14 }}
-              >
+              <span className="font-['Poppins',sans-serif] text-[#787878]" style={{ fontSize: 14 }}>
                 By quote
               </span>
             </div>
@@ -529,7 +580,62 @@ function PricingPanel({ selectedType, onTypeChange }) {
   );
 }
 
-// ─── Trust Badges ──────────────────────────────────────────────────────────
+function PaymentSummaryPanel({ form }) {
+  const quote = calculateQuote(form);
+
+  return (
+    <div
+      className="bg-white rounded-[18px] shadow-sm"
+      style={{ border: "1px solid #eadfd5", padding: 18 }}
+    >
+      <div className="flex flex-col gap-5 min-h-[324px]">
+        <h3
+          className="font-['Poppins',sans-serif] font-semibold text-[#111827] m-0"
+          style={{ fontSize: 18, lineHeight: "24px" }}
+        >
+          Payment Summary
+        </h3>
+
+        <div className="flex flex-col gap-3 text-[#334155] font-['Inter',sans-serif]">
+          <div className="flex items-center justify-between" style={{ fontSize: 18, lineHeight: "24px" }}>
+            <span>Service Amount</span>
+            <span>${quote.serviceAmount}</span>
+          </div>
+          <div className="flex items-center justify-between" style={{ fontSize: 18, lineHeight: "24px" }}>
+            <span>Add on</span>
+            <span>{quote.addOnAmount ? `+$${quote.addOnAmount}` : "$0"}</span>
+          </div>
+        </div>
+
+        <div className="mt-auto flex flex-col gap-5">
+          <div className="border-t border-[#d7d7d7] pt-5 flex items-center justify-between gap-4">
+            <span
+              className="font-['Poppins',sans-serif] font-medium text-[#032b3a]"
+              style={{ fontSize: 18, lineHeight: "24px" }}
+            >
+              Total Amount
+            </span>
+            <span
+              className="font-['Poppins',sans-serif] font-semibold text-[#111827]"
+              style={{ fontSize: 36, lineHeight: "40px" }}
+            >
+              ${quote.totalAmount}
+            </span>
+          </div>
+
+          <button
+            type="button"
+            className="w-full bg-[#da1b61] text-white rounded-[10px] font-['Poppins',sans-serif] font-medium hover:bg-[#c01850] transition-colors cursor-pointer"
+            style={{ fontSize: 18, lineHeight: "28px", padding: "14px 0" }}
+          >
+            Confirm & Pay
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function TrustBadges() {
   return (
     <section className="py-8 lg:py-12 bg-[#fbfbfb]">
@@ -544,11 +650,7 @@ function TrustBadges() {
               className="bg-[#b6c334] flex items-center justify-center rounded-[10px] shrink-0"
               style={{ width: 40, height: 40 }}
             >
-              <img
-                src={badge.icon}
-                alt=""
-                style={{ width: 16, height: 20, objectFit: "contain" }}
-              />
+              <img src={badge.icon} alt="" style={{ width: 16, height: 20, objectFit: "contain" }} />
             </div>
             <p
               className="font-['Poppins',sans-serif] font-medium text-[#0f172a] m-0 text-center"
@@ -569,9 +671,23 @@ function TrustBadges() {
   );
 }
 
-// ─── Page ──────────────────────────────────────────────────────────────────
 export default function QuotePage() {
   const [pricingType, setPricingType] = useState("commercial");
+  const [step, setStep] = useState(1);
+  const [form, setForm] = useState(initialForm);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleQuoteSubmit = (e) => {
+    e.preventDefault();
+    setStep(2);
+  };
 
   return (
     <>
@@ -579,15 +695,21 @@ export default function QuotePage() {
 
       <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-20 py-8 lg:py-12">
         <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 xl:gap-16">
-          {/* ── Left column: Progress + Form ── */}
           <div className="w-full lg:w-[55%] xl:w-[50%]">
-            <ProgressBar />
-            <QuoteFormLeft />
+            <ProgressBar step={step} />
+            {step === 1 ? (
+              <QuoteFormLeft form={form} onChange={handleChange} onSubmit={handleQuoteSubmit} />
+            ) : (
+              <BookingSummaryLeft form={form} onBack={() => setStep(1)} />
+            )}
           </div>
 
-          {/* ── Right column: Pricing panel (sticky on scroll) ── */}
           <div className="w-full lg:w-[45%] xl:w-[50%] lg:sticky lg:top-8 lg:self-start">
-            <PricingPanel selectedType={pricingType} onTypeChange={setPricingType} />
+            {step === 1 ? (
+              <PricingPanel selectedType={pricingType} onTypeChange={setPricingType} />
+            ) : (
+              <PaymentSummaryPanel form={form} />
+            )}
           </div>
         </div>
       </div>
