@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CTABanner from "../components/CTABanner";
 
 // ─── Assets ────────────────────────────────────────────────────────────────
@@ -50,18 +50,69 @@ function ContactHero() {
 }
 
 // ─── Contact form (left panel) ─────────────────────────────────────────────
-function ContactForm() {
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:4000";
+
+function Toast({ message, onDone }) {
+  useEffect(() => {
+    const timer = setTimeout(onDone, 5000);
+    return () => clearTimeout(timer);
+  }, [onDone]);
+
+  return (
+    <div
+      className="fixed top-6 left-1/2 z-50 flex items-center gap-3 bg-[#111827] text-white rounded-xl shadow-lg"
+      style={{ transform: "translateX(-50%)", padding: "14px 24px", minWidth: 260 }}
+    >
+      <span
+        className="flex items-center justify-center rounded-full bg-[#22c55e] shrink-0"
+        style={{ width: 24, height: 24, fontSize: 14 }}
+      >
+        ✓
+      </span>
+      <span className="font-['Poppins',sans-serif]" style={{ fontSize: 15 }}>
+        {message}
+      </span>
+      <button
+        onClick={onDone}
+        className="ml-auto bg-transparent border-0 text-white/60 hover:text-white cursor-pointer"
+        style={{ fontSize: 18, lineHeight: 1 }}
+      >
+        &times;
+      </button>
+    </div>
+  );
+}
+
+function ContactForm({ onSuccess }) {
   const [form, setForm] = useState({
     name: "", phone: "", subject: "", message: "",
   });
+  const [status, setStatus] = useState("idle"); // idle | loading | error
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // handle submit
+    setStatus("loading");
+    try {
+      const res = await fetch(`${BACKEND_URL}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setForm({ name: "", phone: "", subject: "", message: "" });
+        setStatus("idle");
+        onSuccess();
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -142,10 +193,18 @@ function ContactForm() {
             </div>
           </div>
 
+          {/* Status messages */}
+          {status === "error" && (
+            <p className="font-['Inter',sans-serif] text-red-600" style={{ fontSize: 14 }}>
+              Something went wrong. Please try again.
+            </p>
+          )}
+
           {/* Submit */}
           <button
             type="submit"
-            className="flex items-center justify-center gap-2 bg-[#da1b61] text-white rounded-[10px] hover:bg-[#c01850] transition-colors cursor-pointer w-full md:w-auto"
+            disabled={status === "loading"}
+            className="flex items-center justify-center gap-2 bg-[#da1b61] text-white rounded-[10px] hover:bg-[#c01850] transition-colors cursor-pointer w-full md:w-auto disabled:opacity-60 disabled:cursor-not-allowed"
             style={{
               padding: "16px 0",
               fontSize: 20,
@@ -156,8 +215,8 @@ function ContactForm() {
               maxWidth: 351,
             }}
           >
-            Send Message
-            <img src={sendIcon} alt="" style={{ width: 19, height: 16 }} />
+            {status === "loading" ? "Sending..." : "Send Message"}
+            {status !== "loading" && <img src={sendIcon} alt="" style={{ width: 19, height: 16 }} />}
           </button>
         </form>
       </div>
@@ -288,25 +347,23 @@ function ContactInfo() {
   );
 }
 
-// ─── Main two-column layout ────────────────────────────────────────────────
-function ContactContent() {
-  return (
-    <section className="bg-[#fbfbfb] py-8 lg:py-12">
-      <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-20 flex flex-col lg:flex-row items-start gap-8 lg:gap-10">
-        <ContactForm />
-        <ContactInfo />
-      </div>
-    </section>
-  );
-}
-
 // ─── Page ──────────────────────────────────────────────────────────────────
 export default function ContactPage() {
+  const [showToast, setShowToast] = useState(false);
+
   return (
     <>
       <ContactHero />
-      <ContactContent />
+      <section className="bg-[#fbfbfb] py-8 lg:py-12">
+        <div className="max-w-[1440px] mx-auto px-4 md:px-10 lg:px-20 flex flex-col lg:flex-row items-start gap-8 lg:gap-10">
+          <ContactForm onSuccess={() => setShowToast(true)} />
+          <ContactInfo />
+        </div>
+      </section>
       <CTABanner />
+      {showToast && (
+        <Toast message="Message submitted successfully!" onDone={() => setShowToast(false)} />
+      )}
     </>
   );
 }
