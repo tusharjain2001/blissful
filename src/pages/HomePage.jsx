@@ -191,7 +191,7 @@ function FeaturesBar() {
     {
       icon: reliable,
       title: "Reliable",
-      desc: "Meticulous attention to detail in every single room.",
+      desc: "Consistent service that shows up on time.",
       iconBg: "bg-[#b6c334]",
     },
   ];
