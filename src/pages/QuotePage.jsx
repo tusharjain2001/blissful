@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CTABanner from "../components/CTABanner";
+import SquarePaymentModal from "../components/SquarePaymentModal";
 import bonded from "../assets/bonded.svg";
 import satisfaction from "../assets/satisfy.svg";
 import friendly from "../assets/friendly.svg";
@@ -580,7 +581,7 @@ function PricingPanel({ selectedType, onTypeChange }) {
   );
 }
 
-function PaymentSummaryPanel({ form }) {
+function PaymentSummaryPanel({ form, onPay }) {
   const quote = calculateQuote(form);
 
   return (
@@ -625,6 +626,7 @@ function PaymentSummaryPanel({ form }) {
 
           <button
             type="button"
+            onClick={onPay}
             className="w-full bg-[#da1b61] text-white rounded-[10px] font-['Poppins',sans-serif] font-medium hover:bg-[#c01850] transition-colors cursor-pointer"
             style={{ fontSize: 18, lineHeight: "28px", padding: "14px 0" }}
           >
@@ -671,10 +673,43 @@ function TrustBadges() {
   );
 }
 
+function Toast({ message, onDone }) {
+  useEffect(() => {
+    const timer = setTimeout(onDone, 5000);
+    return () => clearTimeout(timer);
+  }, [onDone]);
+
+  return (
+    <div
+      className="fixed top-6 left-1/2 z-50 flex items-center gap-3 bg-[#111827] text-white rounded-xl shadow-lg"
+      style={{ transform: "translateX(-50%)", padding: "14px 24px", minWidth: 260 }}
+    >
+      <span
+        className="flex items-center justify-center rounded-full bg-[#22c55e] shrink-0"
+        style={{ width: 24, height: 24, fontSize: 14 }}
+      >
+        ✓
+      </span>
+      <span className="font-['Poppins',sans-serif]" style={{ fontSize: 15 }}>
+        {message}
+      </span>
+      <button
+        onClick={onDone}
+        className="ml-auto bg-transparent border-0 text-white/60 hover:text-white cursor-pointer"
+        style={{ fontSize: 18, lineHeight: 1 }}
+      >
+        &times;
+      </button>
+    </div>
+  );
+}
+
 export default function QuotePage() {
   const [pricingType, setPricingType] = useState("commercial");
   const [step, setStep] = useState(1);
   const [form, setForm] = useState(initialForm);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -688,6 +723,15 @@ export default function QuotePage() {
     e.preventDefault();
     setStep(2);
   };
+
+  const handlePaymentSuccess = () => {
+    setShowPaymentModal(false);
+    setShowToast(true);
+    setForm(initialForm);
+    setStep(1);
+  };
+
+  const quote = calculateQuote(form);
 
   return (
     <>
@@ -708,7 +752,7 @@ export default function QuotePage() {
             {step === 1 ? (
               <PricingPanel selectedType={pricingType} onTypeChange={setPricingType} />
             ) : (
-              <PaymentSummaryPanel form={form} />
+              <PaymentSummaryPanel form={form} onPay={() => setShowPaymentModal(true)} />
             )}
           </div>
         </div>
@@ -716,6 +760,19 @@ export default function QuotePage() {
 
       <TrustBadges />
       <CTABanner />
+
+      {showPaymentModal && (
+        <SquarePaymentModal
+          amount={quote.totalAmount}
+          form={form}
+          onClose={() => setShowPaymentModal(false)}
+          onSuccess={handlePaymentSuccess}
+        />
+      )}
+
+      {showToast && (
+        <Toast message="Payment Successful!" onDone={() => setShowToast(false)} />
+      )}
     </>
   );
 }
