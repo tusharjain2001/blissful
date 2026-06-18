@@ -198,7 +198,7 @@ function LegacySection() {
           {/* Body */}
           <p className="font-['Plus_Jakarta_Sans',sans-serif] font-normal text-[#475569] m-0 text-base lg:text-[18px] lg:leading-[29.25px]">
             Starting in a small garage in 2012, Blissful Cleaning began with a
-            simple mop and a big dream. Our founder, Maria, started this journey
+            simple mop and a big dream. Our founder, Elza, started this journey
             to provide for her children while helping neighbors find time for
             what matters most. Today, we&rsquo;ve grown into a full team, but
             our core remains unchanged. We treat every employee like family and
