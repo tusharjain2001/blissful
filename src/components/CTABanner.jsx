@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import cta from "../assets/cta.svg";
 
 export default function CTABanner() {
@@ -16,9 +17,12 @@ export default function CTABanner() {
             Join over 5,000+ happy households who trust our blissful touch.
           </p>
 
-          <button className="mt-6 rounded-[8px] bg-white px-5 py-3 font-['Poppins',sans-serif] text-[18px] font-medium text-[#da1b61] shadow-sm transition-colors hover:bg-gray-100">
+          <Link
+            to="/contact"
+            className="mt-6 rounded-[8px] bg-white px-5 py-3 font-['Poppins',sans-serif] text-[18px] font-medium text-[#da1b61] shadow-sm transition-colors hover:bg-gray-100"
+          >
             Book Your Appointment
-          </button>
+          </Link>
         </div>
 
         {/* Right image */}

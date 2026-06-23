@@ -8,7 +8,6 @@ import addressIcon from "../assets/contact-address-icon.svg";
 import sendIcon from "../assets/contact-send-icon.svg";
 import mapImage from "../assets/contact-map.jpg";
 import locationPin from "../assets/location.svg";
-import calendarImage from "../assets/contact-calendar.png";
 import bulletIcon from "../assets/contact-bullet.svg";
 
 const contactCards = [
@@ -279,20 +278,46 @@ function FormField({ label, children, className = "" }) {
 }
 
 // ─── Right panel: calendar + map + service areas ───────────────────────────
+function CalendlyInlineWidget() {
+  useEffect(() => {
+    const existingScript = document.querySelector(
+      'script[src="https://assets.calendly.com/assets/external/widget.js"]'
+    );
+
+    if (existingScript) {
+      window.Calendly?.initInlineWidgets?.();
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    script.onload = () => window.Calendly?.initInlineWidgets?.();
+    document.body.appendChild(script);
+
+    return () => {
+      script.onload = null;
+    };
+  }, []);
+
+  return (
+    <div
+      className="rounded-[10px] overflow-hidden bg-white"
+      style={{ border: "1px solid #e2e8f0" }}
+    >
+      <div
+        className="calendly-inline-widget"
+        data-url="https://calendly.com/blissfulcleaningma/30min"
+        style={{ minWidth: "320px", height: "540px" }}
+      />
+    </div>
+  );
+}
+
 function ContactInfo() {
   return (
     <div className="flex flex-col flex-1" style={{ gap: 16 }}>
-      {/* Calendar image */}
-      <div
-        className="rounded-[10px] overflow-hidden"
-        style={{ border: "1px solid #e2e8f0" }}
-      >
-        <img
-          src={calendarImage}
-          alt="Select a date and time"
-          className="w-full h-auto object-cover"
-        />
-      </div>
+      <CalendlyInlineWidget />
 
       {/* Map image */}
       <div className="rounded-[10px] overflow-hidden relative" style={{ height: 185 }}>

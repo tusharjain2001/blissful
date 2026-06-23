@@ -1,4 +1,5 @@
 // Image assets from Figma
+import { Link } from "react-router-dom";
 import heroRight from "../assets/hero-right.svg";
 import heroEx from "../assets/hero-excellent.svg";
 import pet from "../assets/pet.svg";
@@ -17,6 +18,8 @@ import sarah from "../assets/sarah.svg";
 import michael from "../assets/michael.svg";
 import approved from "../assets/approved.svg";
 import professional from "../assets/professional.svg";
+import ecofriendly from "../assets/eco-friendly.png";
+import insured from "../assets/insured.png";
 import whitearrow from "../assets/white-arrow.svg";
 import cleanwithgroup from "../assets/cleanwithgroup.svg";
 import manclean from "../assets/manclean.svg";
@@ -109,13 +112,19 @@ function Hero() {
           </p>
 
           <div className="mt-8 flex flex-col gap-3 max-w-[230px]">
-            <button className="border-2 border-[#da1b61] text-[#da1b61] font-['Poppins',sans-serif] text-[16px] font-medium px-4 py-3 rounded-[10px] bg-transparent text-left hover:bg-[#da1b61]/5 transition-colors cursor-pointer">
+            <Link
+              to="/contact"
+              className="border-2 border-[#da1b61] text-[#da1b61] font-['Poppins',sans-serif] text-[16px] font-medium px-4 py-3 rounded-[10px] bg-transparent text-left hover:bg-[#da1b61]/5 transition-colors cursor-pointer"
+            >
               Contact us (774-388-6228)
-            </button>
+            </Link>
 
-            <button className="bg-[#da1b61] text-white font-['Poppins',sans-serif] text-[16px] font-medium px-4 py-3 rounded-[10px] hover:bg-[#c01850] transition-colors cursor-pointer text-left">
+            <Link
+              to="/contact"
+              className="bg-[#da1b61] text-white font-['Poppins',sans-serif] text-[16px] font-medium px-4 py-3 rounded-[10px] hover:bg-[#c01850] transition-colors cursor-pointer text-left"
+            >
               Book an Appointment
-            </button>
+            </Link>
           </div>
 
           <div className="flex w-fit rounded-[10px] gap-1 mt-4 p-3 bg-white shadow-sm">
@@ -148,12 +157,18 @@ function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row flex-wrap gap-3 lg:gap-4">
-            <button className="bg-[#da1b61] text-white font-['Poppins',sans-serif] text-base font-medium px-8 py-4 rounded-[10px] hover:bg-[#c01850] transition-colors cursor-pointer">
+            <Link
+              to="/contact"
+              className="bg-[#da1b61] text-white font-['Poppins',sans-serif] text-base font-medium px-8 py-4 rounded-[10px] hover:bg-[#c01850] transition-colors cursor-pointer"
+            >
               Book an Appointment
-            </button>
-            <button className="border-2 border-[#da1b61] text-[#da1b61] font-['Poppins',sans-serif] text-base font-medium px-6 py-4 rounded-[10px] hover:bg-[#da1b61]/5 transition-colors cursor-pointer">
+            </Link>
+            <Link
+              to="/contact"
+              className="border-2 border-[#da1b61] text-[#da1b61] font-['Poppins',sans-serif] text-base font-medium px-6 py-4 rounded-[10px] hover:bg-[#da1b61]/5 transition-colors cursor-pointer"
+            >
               Contact us (774-388-6228)
-            </button>
+            </Link>
           </div>
 
           <div className="flex w-fit rounded-[10px] gap-1 mt-2 p-4 bg-white">
@@ -231,12 +246,12 @@ function WhyChooseUs() {
       desc: "Background-checked and highly trained cleaning experts.",
     },
     {
-      icon: imgs.ecoIcon,
+      icon: ecofriendly,
       title: "Eco-Friendly",
       desc: "Non-toxic products that are safe for your family and pets.",
     },
     {
-      icon: imgs.insuredIcon,
+      icon: insured,
       title: "Insured & Bonded",
       desc: "Complete peace of mind with our fully insured services.",
     },
@@ -290,10 +305,13 @@ function WhyChooseUs() {
               </div>
             ))}
           </div>
-          <button className="flex items-center gap-2 bg-[#da1b61] text-white font-['Poppins',sans-serif] text-base px-8 py-4 rounded-[10px] w-fit hover:bg-[#c01850] transition-colors cursor-pointer">
+          <Link
+            to="/about"
+            className="flex items-center gap-2 bg-[#da1b61] text-white font-['Poppins',sans-serif] text-base px-8 py-4 rounded-[10px] w-fit hover:bg-[#c01850] transition-colors cursor-pointer"
+          >
             Know More
             <img src={whitearrow} alt="" className="w-3 h-3 " />
-          </button>
+          </Link>
         </div>
       </div>
     </section>
